@@ -1,6 +1,9 @@
 <template>
   <div id="category_search">
     <h2>条件検索機能</h2>
+    <h3>業界から探す</h3>
+    <h3>企業所在地から探す</h3>
+    <h3></h3>
     {{ info }}
   </div>
 </template>
