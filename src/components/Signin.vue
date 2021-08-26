@@ -32,12 +32,17 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.mailaddress, this.password)
         .then(
+          () => {
+            alert("成功！！");
+          }
           // 成功時の処理
-          alert("Success!")
         )
-        .catch
-        // エラー時の処理
-        ();
+        .catch(
+          () => {
+            alert("error");
+          }
+          // エラー時の処理
+        );
     },
   },
 };

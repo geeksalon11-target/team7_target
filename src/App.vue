@@ -4,6 +4,7 @@
     <HelloWorld msg="Welcome to Your Vue.js App" />
     <Signup />
     <Signin />
+    <Signout />
   </div>
 </template>
 
@@ -11,6 +12,7 @@
 import HelloWorld from "./components/HelloWorld.vue";
 import Signup from "./components/Signup.vue";
 import Signin from "./components/Signin.vue";
+import Signout from "./components/Signout.vue";
 
 export default {
   name: "App",
@@ -18,6 +20,7 @@ export default {
     HelloWorld,
     Signup,
     Signin,
+    Signout,
   },
 };
 </script>
