@@ -58,7 +58,7 @@
                 type="radio"
                 name="prefecture"
                 v-bind:value="prefecture.name"
-                v-on:change="clickPre(prefecture.code)"
+                v-on:change="clickPre(prefecture.name)"
                 v-bind:id="prefecture.code"
               />
               <label v-bind:for="prefecture.code"> {{ prefecture.name }}</label>
@@ -103,6 +103,7 @@ export default {
       clickedArea: false,
       clickedCategory: false,
       isSelected: false,
+      requestPre: "",
       areas: [],
       industries: [],
       corporations: [],
@@ -128,44 +129,25 @@ export default {
       this.clickedIndustry = false;
     },
     clickSer(id) {
-      if (id === "1") {
-        this.axios
-          .get("https://u10sme-api.smrj.go.jp/v1/corporations.json?services=1")
-          .then((response) => (this.corporations = response.data.corporations))
+      let url =
+        "https://u10sme-api.smrj.go.jp/v1/corporations.json?services=" + id;
+      this.axios
+        .get(url)
+        .then((response) => (this.corporations = response.data.corporations))
 
-          .catch((error) => console.log(error));
-        this.clickedCategory = true;
-      }
+        .catch((error) => console.log(error));
+      this.clickedCategory = true;
     },
-    clickPre(code) {
-      if (code === "01") {
-        this.axios
-          .get(
-            "https://u10sme-api.smrj.go.jp/v1/corporations.json?location=北海道"
-          )
-          .then((response) => (this.corporations = response.data.corporations))
+    clickPre(name) {
+      let url =
+        "https://u10sme-api.smrj.go.jp/v1/corporations.json?location=" + name;
 
-          .catch((error) => console.log(error));
-        this.clickedCategory = true;
-      } else if (code === "02") {
-        this.axios
-          .get(
-            "https://u10sme-api.smrj.go.jp/v1/corporations.json?location=青森県"
-          )
-          .then((response) => (this.corporations = response.data.corporations))
+      this.axios
+        .get(url)
+        .then((response) => (this.corporations = response.data.corporations))
 
-          .catch((error) => console.log(error));
-        this.clickedCategory = true;
-      } else if (code === "03") {
-        this.axios
-          .get(
-            "https://u10sme-api.smrj.go.jp/v1/corporations.json?location=岩手県"
-          )
-          .then((response) => (this.corporations = response.data.corporations))
-
-          .catch((error) => console.log(error));
-        this.clickedCategory = true;
-      }
+        .catch((error) => console.log(error));
+      this.clickedCategory = true;
     },
   },
 };
