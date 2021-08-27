@@ -2,7 +2,9 @@
   <div id="CategorySearch">
     <h2>条件検索</h2>
     <!-- 条件検索エリア -->
+
     <section id="list__categories">
+      <!-- 業種（industryーservice） から検索-->
       <div>
         <h3 class="categories" v-on:click="clickIndustry">業種から探す↓</h3>
 
@@ -37,7 +39,7 @@
           </div>
         </div>
       </div>
-
+      <!-- 地域（areaーprefecture）から探す -->
       <div>
         <h3 class="categories" v-on:click="clickArea">地域から探す↓</h3>
 
@@ -103,13 +105,13 @@ export default {
       clickedArea: false,
       clickedCategory: false,
       isSelected: false,
-      requestPre: "",
       areas: [],
       industries: [],
       corporations: [],
     };
   },
   mounted() {
+    // 職種&地域検索用APIの取得
     this.axios
       .get("https://u10sme-api.smrj.go.jp/v1/serviceCategories.json")
       .then((response) => (this.industries = response.data.serviceCategories))
@@ -120,6 +122,7 @@ export default {
       .catch((error) => console.log(error));
   },
   methods: {
+    // 表示・非表示の切り替え
     clickIndustry() {
       this.clickedIndustry = true;
       this.clickedArea = false;
@@ -129,6 +132,7 @@ export default {
       this.clickedIndustry = false;
     },
     clickSer(id) {
+      // ラジオボタン選択時動作（service）
       let url =
         "https://u10sme-api.smrj.go.jp/v1/corporations.json?services=" + id;
       this.axios
@@ -139,6 +143,7 @@ export default {
       this.clickedCategory = true;
     },
     clickPre(name) {
+      // ラジオボタン選択時動作（prefecture）
       let url =
         "https://u10sme-api.smrj.go.jp/v1/corporations.json?location=" + name;
 
