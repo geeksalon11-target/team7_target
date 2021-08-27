@@ -8,25 +8,27 @@
     <router-view/>
     <img alt="Vue logo" src="./assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" />
+    <div><Coinfo /></div> 
   </div>
 </template>
 
 <script>
 import Search from "./components/search.vue";
-
+import Coinfo from "@/components/Coinfo.vue";
 export default {
   components: {
     Search,
+    Coinfo,
   },
-};
+}
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif, ;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: right;
+  text-align: center;
   color: #2c3e50;
 }
 
