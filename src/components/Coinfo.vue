@@ -2,9 +2,19 @@
   <div class="Coinfo">
     <h1>企業情報検索サイト</h1>
       <div>
-        検索ワード<input type="text" v-model="keywords" placeholder="検索キーワードを入力"/>
+        <input type="text" v-model="keywords" placeholder="検索キーワードを入力"/>
         <button v-on:click="getCompanyNames()">企業を検索する</button>
-        <p>{{json}}</p>
+        <!-- <p>{{json}}</p> -->
+        <!-- <ul v-for="corporation in corporations" v-bind:key="corporation">
+          <h3>{{corporation.name}}</h3>
+        </ul> -->
+        <ul>
+          <li v-for="(corporation, key) in corporations" :key="key">
+            <a v-bind:href="corporation.url" target="_blank">
+              {{corporation.name}}
+            </a>
+          </li>
+        </ul>
       </div>
   </div>
 </template>
@@ -15,16 +25,18 @@ export default {
   data() {
     return {
       keywords:"",
-      json:""
+      json:"",
+      corporations:[]
     }
   },
   methods: {
     getCompanyNames: function () {
-        let url="https://u10sme-api.smrj.go.jp/v1/corporations.json?keywords=" + this.keywords;
+        let api="https://u10sme-api.smrj.go.jp/v1/corporations.json?keywords=" + this.keywords;
         axios
-        .get(url)
+        .get(api)
         .then(response => {
-        this.json = response["data"]
+        this.corporations = response.data.corporations
+        console.log(response)
         });
     }
 }
