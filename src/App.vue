@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
+       <Search />
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
@@ -12,10 +13,11 @@
 </template>
 
 <script>
-import Coinfo from "@/components/Coinfo.vue"
+import Search from "./components/search.vue";
+import Coinfo from "@/components/Coinfo.vue";
 export default {
-  name: "App",
   components: {
+    Search,
     Coinfo,
   },
 }
