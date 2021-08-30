@@ -9,17 +9,35 @@
       />
       <button v-on:click="getCompanyNames()">企業を検索する</button>
       <router-link to="/Casearch">条件検索＞</router-link>
-      <!-- <p>{{json}}</p> -->
-      <!-- <ul v-for="corporation in corporations" v-bind:key="corporation">
-          <h3>{{corporation.name}}</h3>
-        </ul> -->
-      <ul>
-        <li v-for="(corporation, key) in corporations" :key="key">
-          <a v-bind:href="corporation.url" target="_blank">
-            {{ corporation.name }}
-          </a>
-        </li>
-      </ul>
+      <section id="list__corporations">
+        <div v-for="corporation in corporations" v-bind:key="corporation">
+          <h3>
+            <router-link
+              :to="{
+                name: 'Copage',
+                params: { id: corporation.id },
+                query: { name: corporation.name },
+              }"
+            >
+              {{ corporation.name }}</router-link
+            >
+          </h3>
+
+          <div
+            v-for="serviceCategory in corporation.serviceCategories"
+            v-bind:key="serviceCategory"
+          >
+            <div
+              v-for="serviceKind in serviceCategory.serviceKinds"
+              v-bind:key="serviceKind"
+            >
+              <p>＜{{ serviceKind.name }}＞</p>
+            </div>
+          </div>
+
+          <p>{{ corporation.location.address }}</p>
+        </div>
+      </section>
     </div>
   </div>
 </template>

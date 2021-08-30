@@ -12,9 +12,12 @@
             v-bind:key="serviceKind"
           >
             <p>{{ serviceKind.name }}</p>
+            <div v-for="service in serviceKind.services" v-bind:key="service">
+              <p>{{ service.name }}</p>
+            </div>
           </div>
         </div>
-        <p>取引先：{{ corporation.businessResults }}</p>
+        <p>実績：{{ corporation.businessResults }}</p>
         <p>{{ corporation.profile }}</p>
         <p>{{ corporation.location.address }}</p>
         <a v-bind:href="corporation.url">{{ corporation.url }}</a>
