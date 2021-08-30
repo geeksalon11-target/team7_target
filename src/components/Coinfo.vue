@@ -8,6 +8,7 @@
         placeholder="検索キーワードを入力"
       />
       <button v-on:click="getCompanyNames()">企業を検索する</button>
+      <router-link to="/Casearch">条件検索＞</router-link>
       <!-- <p>{{json}}</p> -->
       <!-- <ul v-for="corporation in corporations" v-bind:key="corporation">
           <h3>{{corporation.name}}</h3>

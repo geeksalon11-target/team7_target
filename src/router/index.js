@@ -27,9 +27,10 @@ const routes = [
     component: Casearch,
   },
   {
-    path: "/Copage",
+    path: "/Copage/:id",
     name: "Copage",
     component: Copage,
+    props: true,
   },
 ];
 

@@ -1,5 +1,5 @@
 <template>
-  <div><Coinfo /> <router-link to="/Casearch">条件検索＞</router-link></div>
+  <div><Coinfo /></div>
 </template>
 <script>
 import Coinfo from "../components/Coinfo.vue";

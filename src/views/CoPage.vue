@@ -1,4 +1,8 @@
 <template>
-  <h2>企業詳細ページ</h2>
+  <div>{{ id }}</div>
 </template>
-<script></script>
+<script>
+export default {
+  props: ["id"],
+};
+</script>

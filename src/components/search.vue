@@ -74,7 +74,9 @@
     <section v-if="clickedCategory" id="list__corporations">
       <div v-for="corporation in corporations" v-bind:key="corporation">
         <h3>
-          <router-link to="/Copage">{{ corporation.name }}</router-link>
+          <router-link :to="{ name: 'Copage', params: { id: corporation.id } }">
+            {{ corporation.name }}</router-link
+          >
         </h3>
 
         <div
@@ -119,6 +121,7 @@ export default {
       .then((response) => (this.areas = response.data.areas))
       .catch((error) => console.log(error));
   },
+
   methods: {
     // 表示・非表示の切り替え
     clickIndustry() {
