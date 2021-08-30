@@ -45,6 +45,7 @@ export default {
     return {
       corporations: [],
       resultName: this.$route.query.name,
+      resultKana: this.$route.query.nameKana,
       resultId: this.$route.params.id,
     };
   },
@@ -52,8 +53,8 @@ export default {
     // 企業名で絞込
     this.axios
       .get(
-        "https://u10sme-api.smrj.go.jp/v1/corporations.json?limit=100&keywords=and " +
-          this.resultName
+        "https://u10sme-api.smrj.go.jp/v1/corporations.json?limit=100&keywords=" +
+          this.resultKana
       )
       .then((response) => (this.corporations = response.data.corporations))
       .catch((error) => console.log(error));

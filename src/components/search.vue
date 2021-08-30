@@ -73,19 +73,19 @@
     <!-- 検索結果表示エリア -->
     <section v-if="clickedCategory" id="list__corporations">
       <div v-for="corporation in corporations" v-bind:key="corporation">
-        <h3>
-          <router-link
-            :to="{
-              name: 'Copage',
-              params: { id: corporation.id },
-              query: { name: corporation.name },
-            }"
-            target="_blank"
-          >
-            {{ corporation.name }}</router-link
-          >
-        </h3>
-
+        <router-link
+          :to="{
+            name: 'Copage',
+            params: { id: corporation.id },
+            query: {
+              name: corporation.name,
+              nameKana: corporation.nameKana,
+            },
+          }"
+          target="_blank"
+        >
+          <h3>{{ corporation.name }}</h3></router-link
+        >
         <div
           v-for="serviceCategory in corporation.serviceCategories"
           v-bind:key="serviceCategory"

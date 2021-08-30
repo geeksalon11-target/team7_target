@@ -16,7 +16,10 @@
               :to="{
                 name: 'Copage',
                 params: { id: corporation.id },
-                query: { name: corporation.name },
+                query: {
+                  name: corporation.name,
+                  nameKana: corporation.nameKana,
+                },
               }"
               target="_blank"
             >
