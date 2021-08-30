@@ -73,7 +73,9 @@
     <!-- 検索結果表示エリア -->
     <section v-if="clickedCategory" id="list__corporations">
       <div v-for="corporation in corporations" v-bind:key="corporation">
-        <h3>{{ corporation.name }}</h3>
+        <h3>
+          <router-link to="/Copage">{{ corporation.name }}</router-link>
+        </h3>
 
         <div
           v-for="serviceCategory in corporation.serviceCategories"
@@ -84,14 +86,10 @@
             v-bind:key="serviceKind"
           >
             <p>＜{{ serviceKind.name }}＞</p>
-            <ul v-for="service in serviceKind.services" v-bind:key="service">
-              <li>{{ service.name }}</li>
-            </ul>
           </div>
         </div>
-        <p>{{ corporation.profile }}</p>
+
         <p>{{ corporation.location.address }}</p>
-        <a>{{ corporation.url }}</a>
       </div>
     </section>
   </div>

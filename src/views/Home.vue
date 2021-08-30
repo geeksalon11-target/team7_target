@@ -1,18 +1,11 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <div><Coinfo /> <router-link to="/Casearch">条件検索＞</router-link></div>
 </template>
-
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import Coinfo from "../components/Coinfo.vue";
 export default {
-  name: 'Home',
   components: {
-    HelloWorld
-  }
-}
+    Coinfo,
+  },
+};
 </script>
