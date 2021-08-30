@@ -80,6 +80,7 @@
               params: { id: corporation.id },
               query: { name: corporation.name },
             }"
+            target="_blank"
           >
             {{ corporation.name }}</router-link
           >
