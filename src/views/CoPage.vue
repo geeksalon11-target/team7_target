@@ -2,7 +2,9 @@
   <!-- 企業詳細ページ -->
   <div>
     <section>
-      <h2>{{ resultName }}</h2>
+      <h2>
+        {{ resultName }}
+      </h2>
       <div v-for="corporation in coResults" v-bind:key="corporation.id">
         <h4>業種</h4>
         <div
