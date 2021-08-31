@@ -27,7 +27,7 @@
 import firebase from "firebase";
 export default {
   methods: {
-    login: function() {
+    login: function () {
       firebase
         .auth()
         .signInWithEmailAndPassword(this.mailaddress, this.password)
