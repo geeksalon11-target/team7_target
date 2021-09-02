@@ -10,7 +10,7 @@
       <button v-on:click="getCompanyNames()">企業を検索する</button>
       <router-link to="/Casearch">条件検索＞</router-link>
       <section id="list__corporations" v-if=" clickedKensaku">
-    
+     <p>全{{corporations.length}}件/{{currentPage}}ページ目</p>
         <div v-for="corporation in getCorporations" v-bind:key="corporation">
           <h3>
             <router-link

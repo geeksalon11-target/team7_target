@@ -72,6 +72,7 @@
 
     <!-- 検索結果表示エリア -->
     <section v-if="clickedCategory" id="list__corporations">
+    <p>全{{corporations.length}}件/{{currentPage}}ページ目</p>
       <div v-for="corporation in getCorporations" v-bind:key="corporation">
         <router-link
           :to="{
