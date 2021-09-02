@@ -4,7 +4,9 @@ import axios from "axios";
 import VueAxios from "vue-axios";
 import "./firebase.js";
 import router from "./router";
+import Paginate from "vuejs-paginate";
 
+Vue.component("paginate", Paginate);
 Vue.use(VueAxios, axios);
 
 Vue.config.productionTip = false;

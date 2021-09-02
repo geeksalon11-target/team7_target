@@ -72,7 +72,7 @@
 
     <!-- 検索結果表示エリア -->
     <section v-if="clickedCategory" id="list__corporations">
-      <div v-for="corporation in corporations" v-bind:key="corporation">
+      <div v-for="corporation in getCorporations" v-bind:key="corporation">
         <router-link
           :to="{
             name: 'Copage',
@@ -100,6 +100,18 @@
 
         <p>{{ corporation.location.address }}</p>
       </div>
+      <paginate
+        :page-count="getPageCount"
+        :page-range="3"
+        :margin-pages="2"
+        :click-handler="clickCallback"
+        :prev-text="'＜'"
+        :next-text="'＞'"
+        :container-class="'pagination'"
+        :page-class="'page-item'"
+        :active-class="'current'"
+      >
+      </paginate>
     </section>
   </div>
 </template>
@@ -112,6 +124,8 @@ export default {
       clickedArea: false,
       clickedCategory: false,
       isSelected: false,
+      parPage: 10,
+      currentPage: 1,
       areas: [],
       industries: [],
       corporations: [],
@@ -128,7 +142,16 @@ export default {
       .then((response) => (this.areas = response.data.areas))
       .catch((error) => console.log(error));
   },
-
+  computed: {
+    getCorporations() {
+      let current = this.currentPage * this.parPage;
+      let start = current - this.parPage;
+      return this.corporations.slice(start, current);
+    },
+    getPageCount() {
+      return Math.ceil(this.corporations.length / this.parPage);
+    },
+  },
   methods: {
     // 表示・非表示の切り替え
     clickIndustry() {
@@ -142,7 +165,8 @@ export default {
     clickSer(id) {
       // ラジオボタン選択時動作（service）
       let url =
-        "https://u10sme-api.smrj.go.jp/v1/corporations.json?services=" + id;
+        "https://u10sme-api.smrj.go.jp/v1/corporations.json?limit=100&services=" +
+        id;
       this.axios
         .get(url)
         .then((response) => (this.corporations = response.data.corporations))
@@ -153,7 +177,8 @@ export default {
     clickPre(name) {
       // ラジオボタン選択時動作（prefecture）
       let url =
-        "https://u10sme-api.smrj.go.jp/v1/corporations.json?location=" + name;
+        "https://u10sme-api.smrj.go.jp/v1/corporations.json?limit=100&location=" +
+        name;
 
       this.axios
         .get(url)
@@ -161,6 +186,9 @@ export default {
 
         .catch((error) => console.log(error));
       this.clickedCategory = true;
+    },
+    clickCallback(pageNum) {
+      this.currentPage = Number(pageNum);
     },
   },
 };
@@ -177,5 +205,16 @@ section#list__categories {
 }
 .radio__categories {
   float: left;
+}
+/* ページネーション */
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+}
+.current {
+  background-color:black;
+  font-weight: bold;
+  color:white;
 }
 </style>

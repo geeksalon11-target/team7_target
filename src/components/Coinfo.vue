@@ -9,8 +9,9 @@
       />
       <button v-on:click="getCompanyNames()">企業を検索する</button>
       <router-link to="/Casearch">条件検索＞</router-link>
-      <section id="list__corporations">
-        <div v-for="corporation in corporations" v-bind:key="corporation">
+      <section id="list__corporations" v-if=" clickedKensaku">
+    
+        <div v-for="corporation in getCorporations" v-bind:key="corporation">
           <h3>
             <router-link
               :to="{
@@ -41,6 +42,18 @@
 
           <p>{{ corporation.location.address }}</p>
         </div>
+          <paginate
+        :page-count="getPageCount"
+        :page-range="3"
+        :margin-pages="2"
+        :click-handler="clickCallback"
+        :prev-text="'＜'"
+        :next-text="'＞'"
+        :container-class="'pagination'"
+        :page-class="'page-item'"
+        :active-class="'current'"
+      >
+      </paginate>
       </section>
     </div>
   </div>
@@ -53,19 +66,53 @@ export default {
     return {
       keywords: "",
       json: "",
+      parPage: 10,
+      currentPage: 1,
+      clickedKensaku:false,
       corporations: [],
     };
   },
   methods: {
     getCompanyNames: function () {
       let api =
-        "https://u10sme-api.smrj.go.jp/v1/corporations.json?keywords=" +
+        "https://u10sme-api.smrj.go.jp/v1/corporations.json?limit=100&keywords=" +
         this.keywords;
       axios.get(api).then((response) => {
         this.corporations = response.data.corporations;
         console.log(response);
       });
+       this.clickedKensaku = true
+     
+    },
+     clickCallback(pageNum) {
+         
+      this.currentPage = Number(pageNum);
+
+    },
+  },
+   computed: {
+    getCorporations() {
+      let current = this.currentPage * this.parPage;
+      let start = current - this.parPage;
+      return this.corporations.slice(start, current);
+    },
+    getPageCount() {
+    
+      return Math.ceil(this.corporations.length / this.parPage);
     },
   },
 };
 </script>
+<style>
+/* ページネーション */
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+}
+.current {
+  background-color:black;
+  font-weight: bold;
+  color:white;
+}
+</style>
