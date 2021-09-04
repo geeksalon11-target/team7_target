@@ -64,6 +64,7 @@
       <button @click="pro">変更する</button>
     </div>
     <button v-else @click="hennsyuu">編集</button>
+    <router-link to="/edit">メールアドレスとパスワードを変更</router-link>
   </div>
 </template>
 
@@ -140,7 +141,7 @@ export default {
           this.$router.push("/in");
         })
         .catch(() => {
-          console.log("エラー");
+          alert("エラー");
         });
     },
   },
