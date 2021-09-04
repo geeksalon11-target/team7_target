@@ -16,10 +16,6 @@
     </table>
 
     <button @click="login">ログイン</button>
-    <p>
-      新しいアカウントを作成しますか？
-      <router-link to="/signup">新規登録</router-link>
-    </p>
   </div>
 </template>
 
@@ -27,12 +23,13 @@
 import firebase from "firebase";
 export default {
   methods: {
-    login: function () {
+    login: function() {
       firebase
         .auth()
         .signInWithEmailAndPassword(this.mailaddress, this.password)
         .then(
           () => {
+            this.$router.push("/");
             alert("成功！！");
           }
           // 成功時の処理

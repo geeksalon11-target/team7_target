@@ -1,5 +1,7 @@
 <template>
-  <button @click="signout">ログアウト</button>
+  <div>
+    <router-link to="/in" @click="signout">ログアウト</router-link>
+  </div>
 </template>
 
 <script>

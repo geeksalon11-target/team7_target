@@ -17,7 +17,25 @@
         <th>名前：</th>
       </tr>
       <tr>
-        <td><input type="name" v-model="name" /></td>
+        <td><input type="text" v-model="name" /></td>
+      </tr>
+      <tr>
+        <th>志望職種：</th>
+      </tr>
+      <tr>
+        <td><input type="text" v-model="syokusyu" /></td>
+      </tr>
+      <tr>
+        <th>志望業種：</th>
+      </tr>
+      <tr>
+        <td><input type="text" v-model="gyousyu" /></td>
+      </tr>
+      <tr>
+        <th>お住まいの地域：</th>
+      </tr>
+      <tr>
+        <td><input type="text" v-model="area" /></td>
       </tr>
     </table>
 
@@ -43,10 +61,15 @@ export default {
               .doc(userCredential.user.uid)
               .set({
                 name: this.name,
+                likeCorp: [],
+                area: this.area,
+                occupation: this.syokusyu,
+                industry: this.gyousyu,
               });
           }
         )
         .then(() => {
+          this.$router.push("/");
           alert("成功！！");
         })
         .catch(
