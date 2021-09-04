@@ -11,17 +11,17 @@
         <h4>業種</h4>
         <div
           v-for="serviceCategory in corporation.serviceCategories"
-          v-bind:key="serviceCategory"
+          v-bind:key="serviceCategory.id"
         >
           <div
             v-for="serviceKind in serviceCategory.serviceKinds"
-            v-bind:key="serviceKind"
+            v-bind:key="serviceKind.id"
           >
             <p>
               <span> {{ serviceKind.name }}<br /></span>
               <span
                 v-for="service in serviceKind.services"
-                v-bind:key="service"
+                v-bind:key="service.id"
               >
                 {{ service.name }}/
               </span>
@@ -53,49 +53,83 @@ export default {
       resultName: this.$route.query.name,
       resultKana: this.$route.query.nameKana,
       resultId: this.$route.params.id,
-      userData:{
-        id:"",
-        name:"",
-        likedCorp:[]
-      },
+      userData:[],
       liked:false,
-      initialLength:0
+      initialLength:0,
+      userID:""
     };
   },
-  mounted:function() {
-    // 企業名で絞込
-    this.axios
-      .get(
-        "https://u10sme-api.smrj.go.jp/v1/corporations.json?limit=100&keywords=" +
-          this.resultKana
-      )
-      .then((response) => (this.corporations = response.data.corporations))
-      .catch((error) => console.log(error));
+  created: async function() {
     // firebase get
-    firebase
-      .firestore()
-      .collection("user")
-      .doc(firebase.auth().currentUser.uid)
-      .get()
-      .then((snapshot) => {
-        for (let i = 0; i < snapshot.docs.length; i++) {
-          this.user.push(snapshot.docs[i].data())
-        }
-      })
-    // 初期のいいねした企業数を保存
-    this.initialLength = this.userData.likedCorp.length
+    this.getUserID()
+    this.getCorp()
   },
   methods:{
     LikeFunction:function(){
       this.liked=!this.liked
-    }
-  },
-  created:function(){
-    for (let i = 0; i < this.userData.likedCorp.length; i++) {
-      if(this.resultId == this.userData.likedCorp[i]){
-        console.log('aaa')
-        this.LikeFunction()
+       this.returnUserData()
+    },
+    getUserID: function(){
+      const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // ログインしていれば中通る
+        this.userID = user.uid
+        this.getUser(user.uid)
       }
+      // 登録解除
+      unsubscribe();
+      });
+    },
+    getCorp: function(){
+       // 企業名で絞込
+         this.axios
+          .get(
+            "https://u10sme-api.smrj.go.jp/v1/corporations.json?limit=100&keywords=" +
+              this.resultKana
+          )
+          .then((response) => {
+            this.corporations = response.data.corporations
+          })
+          .catch((error) => console.log(error));
+    },
+    getUser: async function(userID){
+      firebase
+      .firestore()
+      .collection("users")
+      .doc(userID)
+      .get()
+      .then((doc) => {
+        this.userData = doc.data()
+        // 初期のいいねした企業数を保存
+        this.initialLength = doc.data().likeCorp.length
+        for (let i = 0; i < doc.data().likeCorp.length; i++) {
+          if(this.resultId == doc.data().likeCorp[i]){
+            this.LikeFunction()
+          }
+        }
+      })
+    },
+    returnUserData:function(){
+      // いいねの付けはずし
+      if(this.liked){
+        this.userData.likeCorp.push(this.resultId)
+      }else {
+        console.log("false");
+        for (let i = 0; i < this.userData.likeCorp.length; i++) {
+        if(this.resultId == this.userData.likeCorp[i]){
+          this.userData.likeCorp.splice(i,1)
+        }
+      }
+      }
+      if (this.initialLength == this.userData.likeCorp.length) {
+        return false
+      }
+      // firestore
+     firebase
+      .firestore()
+      .collection("users")
+      .doc(this.userID)
+      .set(this.userData)
     }
   },
   computed: {
@@ -106,32 +140,11 @@ export default {
       return result;
     },
   },
-  destroyed:function(){
-    // いいねの付けはずし
-    if (this.initialLength == this.userData.likedCorp.length) {
-      return false
-    }
-    else if(this.liked){
-      this.userData.likedCorp.append(this.resultId)
-    }else {
-      for (let i = 0; i < this.userData.likedCorp.length; i++) {
-      if(this.resultId == this.userData.likedCorp[i]){
-        this.userData.likedCorp.splice(i,1)
-      }
-     }
-    }
-    // firestore
-    firebase
-      .firestore
-      .collection('user')
-      .doc(this.userData.id)
-      .set(this.userData)
-  }
 };
 </script>
 
 <style>
-  li span.star{
+  .span{
     color: yellow;
   }
 </style>
