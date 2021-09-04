@@ -28,7 +28,8 @@ ul {
   list-style: none;
 }
 body,
-ul {
+ul,
+p {
   margin: 0;
   padding: 0;
 }
