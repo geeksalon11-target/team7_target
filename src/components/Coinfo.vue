@@ -72,6 +72,17 @@ export default {
       corporations: [],
     };
   },
+  mounted() {
+    // 職種&地域検索用APIの取得
+    this.axios
+      .get("https://u10sme-api.smrj.go.jp/v1/serviceCategories.json")
+      .then((response) => (this.industries = response.data.serviceCategories))
+      .catch((error) => console.log(error));
+    this.axios
+      .get("https://u10sme-api.smrj.go.jp/v1/areas.json")
+      .then((response) => (this.areas = response.data.areas))
+      .catch((error) => console.log(error));
+  },
   methods: {
     getCompanyNames: function () {
       let api =
