@@ -1,6 +1,7 @@
 <template>
   <div>
     <Signout />
+    <button @click="del">アカウントを削除</button>
     <router-link to="/">ホームへ</router-link>
     <div v-if="edit">
       <tr>
@@ -125,6 +126,22 @@ export default {
     },
     discard: function() {
       this.edit = false;
+    },
+    del: function() {
+      firebase
+        .firestore()
+        .collection("users")
+        .doc(this.user.uid)
+        .delete()
+        .then(() => {
+          firebase.auth().currentUser.delete();
+        })
+        .then(() => {
+          this.$router.push("/in");
+        })
+        .catch(() => {
+          console.log("エラー");
+        });
     },
   },
   created: function() {
