@@ -2,6 +2,10 @@
   <!-- 企業詳細ページ -->
   <div>
     <section>
+      <span v-on:click="toggleLiekd()">
+        <span v-if="liked">★</span>
+        <span v-else>☆</span>
+      </span>
       <h2>{{ resultName }}</h2>
       <div v-for="corporation in coResults" v-bind:key="corporation.id">
         <h4>業種</h4>
@@ -47,7 +51,18 @@ export default {
       resultName: this.$route.query.name,
       resultKana: this.$route.query.nameKana,
       resultId: this.$route.params.id,
+      userData: {
+        id: 111,
+        name: "hoge",
+        likedCorop: [1000111, 203444,10003030,111111111],
+      },
+      liked: false,
     };
+  },
+  methods:{
+    toggleLiekd:function(){
+      this.liked = !this.liked
+    }
   },
   mounted() {
     // 企業名で絞込
@@ -67,5 +82,33 @@ export default {
       return result;
     },
   },
+  created:{
+    // for(let i = 0 ; i < this.userData.likedCorop.length;i++){
+    //   if(this.resultId == this.userData.likedCorop[i]){
+    //     this.toggleLiekd()
+    //   }
+    // }
+  },
+  destroyed:{
+    if(this.liked){
+        // いいねした
+        // likedCorop にIDを追加する処理
+        this.userData.likedCorop.append(resultId)
+        // firebase.
+        //   .firestore
+        //   .collection('user')
+        //   .doc(this.userData.id)
+        //   .set(this.userData)
+      }else{
+        // いいね外した
+        // likedCorop でIDが一致するものを除外する処理
+        for(i=0;i<this.userData.likedCorop.length;i++){
+          if(this.resultId == this.userData.likedCorop[i]){
+            // 除外するコード
+            this.userData.likedCorop.splice(3,1)
+          }
+        }
+      }
+  }
 };
 </script>
