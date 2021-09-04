@@ -1,27 +1,15 @@
 <template>
   <div id="app">
     <div id="nav">
-       <Search />
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
-    <router-view/>
     <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-    <div><Coinfo /></div> 
+    <router-view />
   </div>
 </template>
 
-<script>
-import Search from "./components/search.vue";
-import Coinfo from "@/components/Coinfo.vue";
-export default {
-  components: {
-    Search,
-    Coinfo,
-  },
-}
-</script>
+<script></script>
 
 <style>
 #app {

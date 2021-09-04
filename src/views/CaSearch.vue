@@ -1,11 +1,11 @@
 <template>
-  <div><Coinfo /></div>
+  <div><Search /></div>
 </template>
 <script>
-import Coinfo from "../components/Coinfo.vue";
+import Search from "@/components/search.vue";
 export default {
   components: {
-    Coinfo,
+    Search,
   },
 };
 </script>
