@@ -1,7 +1,11 @@
 <template>
   <div id="app">
-    <Navbar />
-    <router-view />
+    <header>
+      <Navbar />
+    </header>
+    <main>
+      <router-view />
+    </main>
   </div>
 </template>
 
@@ -28,9 +32,27 @@ ul {
   list-style: none;
 }
 body,
+div,
 ul,
+h1,
+h2,
+h3,
+h4,
 p {
   margin: 0;
   padding: 0;
 }
+/* 共通設定 */
+main {
+  width: 90%;
+  margin: 0 auto;
+  height: 100%;
+}
+
+body {
+  background-color: #eee;
+}
+
+/* style.css */
+@import "./style.css";
 </style>

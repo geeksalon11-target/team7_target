@@ -1,0 +1,106 @@
+/* ナビゲーション */
+#nav {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+}
+.nav__content {
+  width: 200px;
+  padding: 1em 0;
+  font-size: 18px;
+  text-align: center;
+}
+#top_visual {
+  height: 200px;
+  text-align: center;
+}
+
+/* 検索方法選択エリア */
+#SearchTools_index {
+  display: flex;
+  width: 100%;
+}
+
+#SearchTools_index li {
+  width: 50%;
+  text-align: center;
+  padding: 1em 0;
+}
+.current_index {
+  background-color: #fff;
+}
+
+/* ページネーション */
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+}
+.current {
+  background-color: black;
+  font-weight: bold;
+  color: #fff;
+}
+/* CoPage search */
+#Coinfo,
+#CategorySearch {
+  /* background-color: #fff; */
+}
+
+.input_keywords {
+  text-align: center;
+  padding: 20px 0;
+  background-color: #fff;
+}
+
+.category_index {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.categories {
+  padding: 1em 0;
+  width: 25%;
+}
+
+.clickedIndustry,
+.clickedArea {
+  height: 300px;
+  overflow: scroll;
+}
+
+section {
+  padding: 0 10px;
+}
+
+#list__categories {
+  background-color: #fff;
+}
+
+/* 検索結果表示エリア */
+
+.list_corporation {
+  margin-top: 1em;
+  border-bottom: 1px solid;
+  padding-bottom: 1em;
+}
+
+.list_corporation:nth-child(even) {
+}
+.list_corporation p,
+.list_corporation li {
+  color: rgb(77, 77, 77);
+  font-size: 14px;
+}
+.serviceCategory {
+  display: flex;
+  margin: 0.5em 0;
+}
+.serviceCategory ul {
+  float: left;
+}
+.tag {
+  border-right: solid 1px;
+  margin-right: 0.5em;
+}

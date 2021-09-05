@@ -1,14 +1,15 @@
 <template>
   <div id="CategorySearch">
-    <h2>条件検索</h2>
     <!-- 条件検索エリア -->
 
     <section id="list__categories">
       <!-- 業種（industryーservice） から検索-->
+      <div class="category_index">
+        <h3 class="categories" v-on:click="clickIndustry">業種</h3>
+        <h3 class="categories" v-on:click="clickArea">地域</h3>
+      </div>
       <div>
-        <h3 class="categories" v-on:click="clickIndustry">業種から探す↓</h3>
-
-        <div v-if="clickedIndustry">
+        <div class="clickedIndustry" v-if="clickedIndustry">
           <div
             class="category__industries"
             v-for="industry in industries"
@@ -30,7 +31,7 @@
                   type="radio"
                   name="service"
                   v-bind:value="service.name"
-                  v-on:change="clickSer(service.id)"
+                  v-on:change="clickSer(service.id, service.name)"
                   v-bind:id="service.id"
                 />
                 <label> {{ service.name }}</label>
@@ -41,9 +42,7 @@
       </div>
       <!-- 地域（areaーprefecture）から探す -->
       <div>
-        <h3 class="categories" v-on:click="clickArea">地域から探す↓</h3>
-
-        <div v-if="clickedArea">
+        <div class="clickedArea" v-if="clickedArea">
           <div
             class="category__prefectures"
             v-for="area in areas"
@@ -72,8 +71,15 @@
 
     <!-- 検索結果表示エリア -->
     <section v-if="clickedCategory" id="list__corporations">
-    <p>全{{corporations.length}}件/{{currentPage}}ページ目</p>
-      <div v-for="corporation in getCorporations" v-bind:key="corporation">
+      <p>
+        <span>🔍{{ searchWord }}</span
+        ><br />全{{ corporations.length }}件/{{ currentPage }}ページ目
+      </p>
+      <div
+        class="list_corporation"
+        v-for="corporation in getCorporations"
+        v-bind:key="corporation"
+      >
         <router-link
           :to="{
             name: 'Copage',
@@ -87,19 +93,23 @@
         >
           <h3>{{ corporation.name }}</h3></router-link
         >
-        <div
-          v-for="serviceCategory in corporation.serviceCategories"
-          v-bind:key="serviceCategory"
-        >
+
+        <div class="serviceCategory">
+          <p class="tag">業種</p>
           <div
-            v-for="serviceKind in serviceCategory.serviceKinds"
-            v-bind:key="serviceKind"
+            v-for="serviceCategory in corporation.serviceCategories"
+            v-bind:key="serviceCategory"
           >
-            <p>＜{{ serviceKind.name }}＞</p>
+            <ul
+              v-for="serviceKind in serviceCategory.serviceKinds"
+              v-bind:key="serviceKind"
+            >
+              <li>{{ serviceKind.name }}&nbsp;</li>
+            </ul>
           </div>
         </div>
 
-        <p>{{ corporation.location.address }}</p>
+        <p><span class="tag">本社</span>{{ corporation.location.address }}</p>
       </div>
       <paginate
         :page-count="getPageCount"
@@ -127,6 +137,7 @@ export default {
       isSelected: false,
       parPage: 10,
       currentPage: 1,
+      searchWord: "",
       areas: [],
       industries: [],
       corporations: [],
@@ -163,7 +174,7 @@ export default {
       this.clickedArea = true;
       this.clickedIndustry = false;
     },
-    clickSer(id) {
+    clickSer(id, name) {
       // ラジオボタン選択時動作（service）
       let url =
         "https://u10sme-api.smrj.go.jp/v1/corporations.json?limit=100&services=" +
@@ -173,7 +184,10 @@ export default {
         .then((response) => (this.corporations = response.data.corporations))
 
         .catch((error) => console.log(error));
+      this.searchWord = name;
       this.clickedCategory = true;
+      this.clickedArea = false;
+      this.clickedIndustry = false;
     },
     clickPre(name) {
       // ラジオボタン選択時動作（prefecture）
@@ -186,7 +200,10 @@ export default {
         .then((response) => (this.corporations = response.data.corporations))
 
         .catch((error) => console.log(error));
+      this.searchWord = name;
       this.clickedCategory = true;
+      this.clickedArea = false;
+      this.clickedIndustry = false;
     },
     clickCallback(pageNum) {
       this.currentPage = Number(pageNum);
@@ -206,16 +223,5 @@ section#list__categories {
 }
 .radio__categories {
   float: left;
-}
-/* ページネーション */
-.pagination {
-  display: flex;
-  justify-content: center;
-  list-style: none;
-}
-.current {
-  background-color:black;
-  font-weight: bold;
-  color:white;
 }
 </style>

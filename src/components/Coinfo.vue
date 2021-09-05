@@ -1,59 +1,67 @@
 <template>
-  <div class="Coinfo">
-    <h1>企業情報検索サイト</h1>
+  <div id="Coinfo">
     <div>
-      <input
-        type="text"
-        v-model="keywords"
-        placeholder="検索キーワードを入力"
-      />
-      <button v-on:click="getCompanyNames()">企業を検索する</button>
-      <router-link to="/Casearch">条件検索＞</router-link>
-      <section id="list__corporations" v-if=" clickedKensaku">
-     <p>全{{corporations.length}}件/{{currentPage}}ページ目</p>
-        <div v-for="corporation in getCorporations" v-bind:key="corporation">
-          <h3>
-            <router-link
-              :to="{
-                name: 'Copage',
-                params: { id: corporation.id },
-                query: {
-                  name: corporation.name,
-                  nameKana: corporation.nameKana,
-                },
-              }"
-              target="_blank"
-            >
-              {{ corporation.name }}</router-link
-            >
-          </h3>
-
-          <div
-            v-for="serviceCategory in corporation.serviceCategories"
-            v-bind:key="serviceCategory"
+      <div class="input_keywords">
+        <input
+          type="text"
+          v-model="keywords"
+          placeholder="検索キーワードを入力"
+        />
+        <button v-on:click="getCompanyNames()">企業を検索する</button>
+      </div>
+      <section id="list__corporations" v-if="clickedKensaku">
+        <p>
+          <span>🔍{{ searchWord }}</span
+          ><br />全{{ corporations.length }}件/{{ currentPage }}ページ目
+        </p>
+        <div
+          class="list_corporation"
+          v-for="corporation in getCorporations"
+          v-bind:key="corporation"
+        >
+          <router-link
+            :to="{
+              name: 'Copage',
+              params: { id: corporation.id },
+              query: {
+                name: corporation.name,
+                nameKana: corporation.nameKana,
+              },
+            }"
+            target="_blank"
           >
+            <h3>{{ corporation.name }}</h3></router-link
+          >
+          <div class="serviceCategory">
+            <p class="tag">業種</p>
             <div
-              v-for="serviceKind in serviceCategory.serviceKinds"
-              v-bind:key="serviceKind"
+              v-for="serviceCategory in corporation.serviceCategories"
+              v-bind:key="serviceCategory"
             >
-              <p>＜{{ serviceKind.name }}＞</p>
+              <ul
+                v-for="serviceKind in serviceCategory.serviceKinds"
+                v-bind:key="serviceKind"
+              >
+                <li>{{ serviceKind.name }}&nbsp;</li>
+              </ul>
             </div>
           </div>
 
-          <p>{{ corporation.location.address }}</p>
+          <p><span class="tag">本社</span>{{ corporation.location.address }}</p>
         </div>
-          <paginate
-        :page-count="getPageCount"
-        :page-range="3"
-        :margin-pages="2"
-        :click-handler="clickCallback"
-        :prev-text="'＜'"
-        :next-text="'＞'"
-        :container-class="'pagination'"
-        :page-class="'page-item'"
-        :active-class="'current'"
-      >
-      </paginate>
+
+        <paginate
+          :page-count="getPageCount"
+          :page-range="3"
+          :margin-pages="2"
+          :click-handler="clickCallback"
+          :prev-text="'＜'"
+          :next-text="'＞'"
+          :container-class="'pagination'"
+          :page-class="'page-item'"
+          :active-class="'current'"
+        >
+        </paginate>
       </section>
     </div>
   </div>
@@ -66,9 +74,10 @@ export default {
     return {
       keywords: "",
       json: "",
+      searchWord: "",
       parPage: 10,
       currentPage: 1,
-      clickedKensaku:false,
+      clickedKensaku: false,
       corporations: [],
     };
   },
@@ -92,38 +101,23 @@ export default {
         this.corporations = response.data.corporations;
         console.log(response);
       });
-       this.clickedKensaku = true
-     
+      this.searchWord = this.keywords;
+      this.clickedKensaku = true;
     },
-     clickCallback(pageNum) {
-         
+    clickCallback(pageNum) {
       this.currentPage = Number(pageNum);
-
     },
   },
-   computed: {
+  computed: {
     getCorporations() {
       let current = this.currentPage * this.parPage;
       let start = current - this.parPage;
       return this.corporations.slice(start, current);
     },
     getPageCount() {
-    
       return Math.ceil(this.corporations.length / this.parPage);
     },
   },
 };
 </script>
-<style>
-/* ページネーション */
-.pagination {
-  display: flex;
-  justify-content: center;
-  list-style: none;
-}
-.current {
-  background-color:black;
-  font-weight: bold;
-  color:white;
-}
-</style>
+<style></style>
