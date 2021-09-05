@@ -12,7 +12,7 @@
 
       <section id="list__corporations" v-if="clickedKensaku">
         <p class="searchWord">
-          <span>🔍「{{ searchWord }}」&nbsp;の検索結果</span><br />全{{
+          <span>🔍「{{ searchWord }}」&nbsp;検索結果</span><br />全{{
             corporations.length
           }}件/{{ currentPage }}ページ目
         </p>

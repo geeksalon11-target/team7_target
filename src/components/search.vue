@@ -27,16 +27,17 @@
                 v-bind:key="service"
               >
                 <input
-                  type="radio"
+                  type="checkbox"
                   name="service"
-                  v-bind:value="service.name"
-                  v-on:change="clickSer(service.id, service.name)"
+                  v-bind:value="service.id"
+                  v-model="checkedValues"
                   v-bind:id="service.id"
                 />
                 <label> {{ service.name }}</label>
               </div>
             </div>
           </div>
+          <button v-on:click="searchSer">検索</button>
         </div>
       </div>
       <!-- 地域（areaーprefecture）から探す -->
@@ -58,12 +59,13 @@
                 type="radio"
                 name="prefecture"
                 v-bind:value="prefecture.name"
-                v-on:change="clickPre(prefecture.name)"
+                v-model="radioValue"
                 v-bind:id="prefecture.code"
               />
               <label v-bind:for="prefecture.code"> {{ prefecture.name }}</label>
             </div>
           </div>
+          <button v-on:click="searchPre">検索</button>
         </div>
       </div>
     </section>
@@ -72,10 +74,11 @@
 
     <section v-if="clickedCategory" id="list__corporations">
       <p class="searchWord">
-        <span>🔍「{{ searchWord }}」&nbsp;の検索結果</span><br />全{{
+        <span>🔍{{ searchWord }}&nbsp;検索結果</span><br />全{{
           corporations.length
         }}件/{{ currentPage }}ページ目
       </p>
+
       <div
         class="list_corporation"
         v-for="corporation in getCorporations"
@@ -139,6 +142,8 @@ export default {
       parPage: 10,
       currentPage: 1,
       searchWord: "",
+      checkedValue: [],
+      radioValues: "",
       areas: [],
       industries: [],
       corporations: [],
@@ -175,33 +180,35 @@ export default {
       this.clickedArea = true;
       this.clickedIndustry = false;
     },
-    clickSer(id, name) {
-      // ラジオボタン選択時動作（service）
+
+    searchSer() {
+      // チェックボックス選択時動作（service）
       let url =
         "https://u10sme-api.smrj.go.jp/v1/corporations.json?limit=100&services=" +
-        id;
+        this.checkedValues;
       this.axios
         .get(url)
         .then((response) => (this.corporations = response.data.corporations))
 
         .catch((error) => console.log(error));
-      this.searchWord = name;
+
       this.clickedCategory = true;
       this.clickedArea = false;
       this.clickedIndustry = false;
     },
-    clickPre(name) {
+
+    searchPre() {
       // ラジオボタン選択時動作（prefecture）
       let url =
         "https://u10sme-api.smrj.go.jp/v1/corporations.json?limit=100&location=" +
-        name;
+        this.radioValue;
 
       this.axios
         .get(url)
         .then((response) => (this.corporations = response.data.corporations))
 
         .catch((error) => console.log(error));
-      this.searchWord = name;
+      this.searchWord = this.radioValue;
       this.clickedCategory = true;
       this.clickedArea = false;
       this.clickedIndustry = false;
