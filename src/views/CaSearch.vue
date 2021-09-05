@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="top_visual"><h1>中小企業情報検索</h1></div>
+    <TopVisual />
     <div>
       <ul id="SearchTools_index">
         <li><router-link to="/">キーワードから検索</router-link></li>
@@ -12,9 +12,11 @@
 </template>
 <script>
 import Search from "@/components/search.vue";
+import TopVisual from "../components/TopVisual.vue";
 export default {
   components: {
     Search,
+    TopVisual,
   },
 };
 </script>

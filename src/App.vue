@@ -44,7 +44,7 @@ p {
 }
 /* 共通設定 */
 main {
-  width: 90%;
+  width: 95%;
   margin: 0 auto;
   height: 100%;
 }

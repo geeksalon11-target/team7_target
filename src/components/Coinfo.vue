@@ -9,8 +9,9 @@
         />
         <button v-on:click="getCompanyNames()">企業を検索する</button>
       </div>
+
       <section id="list__corporations" v-if="clickedKensaku">
-        <p>
+        <p class="searchWord">
           <span>🔍{{ searchWord }}</span
           ><br />全{{ corporations.length }}件/{{ currentPage }}ページ目
         </p>

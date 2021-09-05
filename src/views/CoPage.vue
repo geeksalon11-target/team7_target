@@ -1,14 +1,14 @@
 <template>
   <!-- 企業詳細ページ -->
   <div>
-    <section>
+    <section id="CoPage">
       <span v-on:click="LikeFunction()">
         <span v-if="liked">★</span>
         <span v-else>☆</span>
       </span>
-      <h2>{{ resultName }}</h2>
+      <h1>{{ resultName }}</h1>
       <div v-for="corporation in coResults" v-bind:key="corporation.id">
-        <h4>業種</h4>
+        <h3>業種</h3>
         <div
           v-for="serviceCategory in corporation.serviceCategories"
           v-bind:key="serviceCategory.id"
@@ -28,12 +28,12 @@
             </p>
           </div>
         </div>
-        <h4>本社</h4>
+        <h3>本社</h3>
         <p>{{ corporation.location.address }}</p>
 
-        <h3>企業紹介</h3>
+        <h2>企業紹介</h2>
         <p>{{ corporation.profile }}</p>
-        <h3>企業実績</h3>
+        <h2>企業実績</h2>
         <p>{{ corporation.businessResults }}</p>
 
         <a v-bind:href="corporation.url">{{ corporation.url }}</a>

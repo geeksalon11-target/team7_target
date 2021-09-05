@@ -11,9 +11,17 @@
   font-size: 18px;
   text-align: center;
 }
+/* メインビジュアルエリア */
 #top_visual {
   height: 200px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.site_title {
 }
 
 /* 検索方法選択エリア */
@@ -31,21 +39,9 @@
   background-color: #fff;
 }
 
-/* ページネーション */
-.pagination {
-  display: flex;
-  justify-content: center;
-  list-style: none;
-}
-.current {
-  background-color: black;
-  font-weight: bold;
-  color: #fff;
-}
 /* CoPage search */
 #Coinfo,
 #CategorySearch {
-  /* background-color: #fff; */
 }
 
 .input_keywords {
@@ -68,10 +64,7 @@
 .clickedArea {
   height: 300px;
   overflow: scroll;
-}
-
-section {
-  padding: 0 10px;
+  padding: 0 1em;
 }
 
 #list__categories {
@@ -79,11 +72,26 @@ section {
 }
 
 /* 検索結果表示エリア */
-
+#list__corporations {
+}
 .list_corporation {
-  margin-top: 1em;
   border-bottom: 1px solid;
-  padding-bottom: 1em;
+  padding: 1em;
+  background-color: #fff;
+}
+
+.searchWord {
+  margin: 1em auto 1em auto;
+  width: 100%;
+  text-align: center;
+  line-height: 2.5em;
+  font-size: 14px;
+}
+
+.searchWord span {
+  padding: 0.5em 0;
+  font-weight: bold;
+  font-size: 16px;
 }
 
 .list_corporation:nth-child(even) {
@@ -103,4 +111,34 @@ section {
 .tag {
   border-right: solid 1px;
   margin-right: 0.5em;
+}
+
+/* ページネーション */
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin: 1em 0;
+}
+.current {
+  background-color: #fff;
+  font-weight: bold;
+  border-radius: 22px;
+}
+
+.pagination a {
+  padding: 10px 0;
+  width: 44px;
+  text-align: center;
+  display: block;
+}
+
+/* 企業詳細ページ */
+#CoPage h1 {
+  font-size: 28px;
+  margin-bottom: 0.5em;
+}
+
+#CoPage p {
+  margin-bottom: 0.5em;
 }

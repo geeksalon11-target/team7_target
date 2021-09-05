@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="top_visual"><h1>中小企業情報検索</h1></div>
+    <TopVisual />
     <ul id="SearchTools_index">
       <li class="current_index">キーワードから検索</li>
       <li>
@@ -12,9 +12,11 @@
 </template>
 <script>
 import Coinfo from "../components/Coinfo.vue";
+import TopVisual from "../components/TopVisual.vue";
 export default {
   components: {
     Coinfo,
+    TopVisual,
   },
 };
 </script>

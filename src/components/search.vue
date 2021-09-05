@@ -70,8 +70,9 @@
     </section>
 
     <!-- 検索結果表示エリア -->
+
     <section v-if="clickedCategory" id="list__corporations">
-      <p>
+      <p class="searchWord">
         <span>🔍{{ searchWord }}</span
         ><br />全{{ corporations.length }}件/{{ currentPage }}ページ目
       </p>
@@ -213,9 +214,6 @@ export default {
 </script>
 
 <style>
-section#list__categories {
-  border-bottom: solid 1px;
-}
 .category__prefectures,
 .category__industries,
 .category__services {
