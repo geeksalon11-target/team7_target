@@ -5,11 +5,24 @@
     <section id="list__categories">
       <!-- 業種（industryーservice） から検索-->
       <div class="category_index">
-        <h3 class="categories" v-on:click="clickIndustry">業種▽</h3>
-        <h3 class="categories" v-on:click="clickArea">地域▽</h3>
+        <button
+          v-bind:disabled="Disabled"
+          class="categories"
+          v-on:click="clickIndustry"
+        >
+          業種▽
+        </button>
+        <button
+          v-bind:disabled="Disabled"
+          class="categories"
+          v-on:click="clickArea"
+        >
+          地域▽
+        </button>
       </div>
-      <div>
-        <div class="clickedIndustry" v-if="clickedIndustry">
+
+      <div class="clickedIndustry" v-if="clickedIndustry">
+        <div class="category__scroll">
           <div
             class="category__industries"
             v-for="industry in industries"
@@ -37,12 +50,16 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="searchSer">
           <button v-on:click="searchSer">検索</button>
         </div>
       </div>
+
       <!-- 地域（areaーprefecture）から探す -->
-      <div>
-        <div class="clickedArea" v-if="clickedArea">
+
+      <div class="clickedArea" v-if="clickedArea">
+        <div class="category__scroll">
           <div
             class="category__prefectures"
             v-for="area in areas"
@@ -65,6 +82,8 @@
               <label v-bind:for="prefecture.code"> {{ prefecture.name }}</label>
             </div>
           </div>
+        </div>
+        <div class="searchPre">
           <button v-on:click="searchPre">検索</button>
         </div>
       </div>
@@ -78,6 +97,9 @@
           corporations.length
         }}件/{{ currentPage }}ページ目
       </p>
+      <button v-on:click="Category_clear" class="category_clear">
+        条件をクリア
+      </button>
 
       <div
         class="list_corporation"
@@ -138,11 +160,11 @@ export default {
       clickedIndustry: false,
       clickedArea: false,
       clickedCategory: false,
-      isSelected: false,
+      Disabled: false,
       parPage: 10,
       currentPage: 1,
       searchWord: "",
-      checkedValue: [],
+      checkedValues: [],
       radioValues: "",
       areas: [],
       industries: [],
@@ -195,6 +217,7 @@ export default {
       this.clickedCategory = true;
       this.clickedArea = false;
       this.clickedIndustry = false;
+      this.Disabled = true;
     },
 
     searchPre() {
@@ -212,6 +235,10 @@ export default {
       this.clickedCategory = true;
       this.clickedArea = false;
       this.clickedIndustry = false;
+      this.Disabled = true;
+    },
+    Category_clear() {
+      location.reload(true);
     },
     clickCallback(pageNum) {
       this.currentPage = Number(pageNum);
