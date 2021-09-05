@@ -8,7 +8,7 @@
 .nav__content {
   width: 200px;
   padding: 1em 0;
-  font-size: 18px;
+
   text-align: center;
 }
 
@@ -18,12 +18,29 @@
 }
 /* メインビジュアルエリア */
 #top_visual {
-  height: 200px;
+  height: 300px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#91cfff+0,ffffff+100&1+0,0+100 */
+  background: -moz-linear-gradient(
+    top,
+    rgba(145, 207, 255, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  ); /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    top,
+    rgba(145, 207, 255, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    rgba(145, 207, 255, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#91cfff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
 }
 
 .site_title {
@@ -35,16 +52,17 @@
   width: 100%;
 }
 #SearchTools_index a {
-  color: #90e0ff;
+  color: #91cfff;
   font-weight: bold;
 }
 #SearchTools_index li {
   width: 50%;
   text-align: center;
   padding: 1em 0;
+  font-size: 18px;
 }
 .current_index {
-  background-color: #90e0ff;
+  background-color: #91cfff;
   color: #fff;
   font-weight: bold;
 }
@@ -60,7 +78,7 @@
 }
 .input_keywords,
 #list__categories {
-  background-color: #90e0ff;
+  background-color: #91cfff;
   border-bottom: double 8px #fff;
 }
 
@@ -134,11 +152,11 @@
   justify-content: center;
   list-style: none;
   font-weight: bold;
-  color: #90e0ff;
+  color: #91cfff;
   margin: 1em 0;
 }
 .current {
-  background-color: #90e0ff;
+  background-color: #91cfff;
   color: #fff;
   border-radius: 22px;
 }
@@ -155,8 +173,8 @@
 #CoPage h1 {
   font-size: 28px;
   margin-bottom: 0.5em;
-  border-bottom: 2px solid #90e0ff;
-  border-left: 10px solid #90e0ff;
+  border-bottom: 2px solid #91cfff;
+  border-left: 10px solid #91cfff;
   padding-left: 10px;
   width: 90%;
   margin: 0 auto;
@@ -174,8 +192,19 @@
 #CoPage p,
 #CoPage a {
   padding: 0 5%;
-  color: rgb(77, 77, 77);
 }
-
-.CoPage_container {
+#CoPage table {
+  padding: 0 5%;
+  vertical-align: middle;
+  width: 100%;
+}
+#CoPage table h3,
+#CoPage table p,
+#CoPage table a {
+  margin: 0;
+  padding: 0.5em 0;
+}
+.lastUpdateTime {
+  text-align: right;
+  font-size: 14px;
 }

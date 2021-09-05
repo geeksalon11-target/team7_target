@@ -5,8 +5,8 @@
     <section id="list__categories">
       <!-- 業種（industryーservice） から検索-->
       <div class="category_index">
-        <h3 class="categories" v-on:click="clickIndustry">業種</h3>
-        <h3 class="categories" v-on:click="clickArea">地域</h3>
+        <h3 class="categories" v-on:click="clickIndustry">業種▽</h3>
+        <h3 class="categories" v-on:click="clickArea">地域▽</h3>
       </div>
       <div>
         <div class="clickedIndustry" v-if="clickedIndustry">
@@ -72,8 +72,9 @@
 
     <section v-if="clickedCategory" id="list__corporations">
       <p class="searchWord">
-        <span>🔍{{ searchWord }}</span
-        ><br />全{{ corporations.length }}件/{{ currentPage }}ページ目
+        <span>🔍「{{ searchWord }}」&nbsp;の検索結果</span><br />全{{
+          corporations.length
+        }}件/{{ currentPage }}ページ目
       </p>
       <div
         class="list_corporation"

@@ -42,6 +42,9 @@ p {
   margin: 0;
   padding: 0;
 }
+p {
+  color: rgb(77, 77, 77);
+}
 /* 共通設定 */
 main {
   width: 100%;

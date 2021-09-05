@@ -19,25 +19,57 @@
             v-bind:key="serviceKind.id"
           >
             <p>
-              <span> {{ serviceKind.name }}<br /></span>
+              <span> {{ serviceKind.name }}:</span>
               <span
                 v-for="service in serviceKind.services"
                 v-bind:key="service.id"
               >
-                {{ service.name }}/
+                {{ service.name }}&nbsp;
               </span>
             </p>
           </div>
         </div>
-        <h3>本社</h3>
-        <p>{{ corporation.location.address }}</p>
 
         <h2>企業紹介</h2>
         <p>{{ corporation.profile }}</p>
         <h2>企業実績</h2>
         <p>{{ corporation.businessResults }}</p>
-        <h3>ホームページ</h3>
-        <a v-bind:href="corporation.url">{{ corporation.url }}</a>
+        <h2>会社データ</h2>
+        <table>
+          <tr>
+            <td><h3>会社名</h3></td>
+            <td>
+              <p>{{ corporation.name }}</p>
+            </td>
+          </tr>
+          <tr>
+            <td><h3>設立日</h3></td>
+            <td>
+              <p>{{ corporation.foundationDate }}</p>
+            </td>
+          </tr>
+          <tr>
+            <td><h3>資本金</h3></td>
+            <td>
+              <p>{{ corporation.capital }}円</p>
+            </td>
+          </tr>
+          <tr>
+            <td><h3>本店所在地</h3></td>
+            <td>
+              <p>{{ corporation.location.address }}</p>
+            </td>
+          </tr>
+          <tr>
+            <td><h3>ホームページ</h3></td>
+            <td>
+              <a v-bind:href="corporation.url">{{ corporation.url }}</a>
+            </td>
+          </tr>
+        </table>
+        <p class="lastUpdateTime">
+          ※最終更新日：{{ corporation.lastUpdateTime }}
+        </p>
       </div>
     </div>
   </section>
@@ -144,8 +176,4 @@ export default {
 };
 </script>
 
-<style>
-.span {
-  color: yellow;
-}
-</style>
+<style></style>
