@@ -11,6 +11,11 @@
   font-size: 18px;
   text-align: center;
 }
+
+.nav__content a {
+  color: #111;
+  text-decoration: none;
+}
 /* メインビジュアルエリア */
 #top_visual {
   height: 200px;
@@ -29,14 +34,19 @@
   display: flex;
   width: 100%;
 }
-
+#SearchTools_index a {
+  color: #90e0ff;
+  font-weight: bold;
+}
 #SearchTools_index li {
   width: 50%;
   text-align: center;
   padding: 1em 0;
 }
 .current_index {
-  background-color: #fff;
+  background-color: #90e0ff;
+  color: #fff;
+  font-weight: bold;
 }
 
 /* CoPage search */
@@ -47,7 +57,11 @@
 .input_keywords {
   text-align: center;
   padding: 20px 0;
-  background-color: #fff;
+}
+.input_keywords,
+#list__categories {
+  background-color: #90e0ff;
+  border-bottom: double 8px #fff;
 }
 
 .category_index {
@@ -58,16 +72,15 @@
 .categories {
   padding: 1em 0;
   width: 25%;
+  color: #fff;
 }
 
 .clickedIndustry,
 .clickedArea {
   height: 300px;
   overflow: scroll;
-  padding: 0 1em;
-}
-
-#list__categories {
+  overflow-x: hidden;
+  padding: 0 5%;
   background-color: #fff;
 }
 
@@ -75,17 +88,18 @@
 #list__corporations {
 }
 .list_corporation {
-  border-bottom: 1px solid;
-  padding: 1em;
-  background-color: #fff;
+  padding: 1em 5%;
+  background-color: #f8fcff;
 }
 
 .searchWord {
-  margin: 1em auto 1em auto;
+  margin: 0 auto;
+  padding: 1em 0;
   width: 100%;
   text-align: center;
   line-height: 2.5em;
   font-size: 14px;
+  background-color: #f8fcff;
 }
 
 .searchWord span {
@@ -95,6 +109,7 @@
 }
 
 .list_corporation:nth-child(even) {
+  background-color: #fff;
 }
 .list_corporation p,
 .list_corporation li {
@@ -118,11 +133,13 @@
   display: flex;
   justify-content: center;
   list-style: none;
+  font-weight: bold;
+  color: #90e0ff;
   margin: 1em 0;
 }
 .current {
-  background-color: #fff;
-  font-weight: bold;
+  background-color: #90e0ff;
+  color: #fff;
   border-radius: 22px;
 }
 
@@ -134,11 +151,31 @@
 }
 
 /* 企業詳細ページ */
+
 #CoPage h1 {
   font-size: 28px;
   margin-bottom: 0.5em;
+  border-bottom: 2px solid #90e0ff;
+  border-left: 10px solid #90e0ff;
+  padding-left: 10px;
+  width: 90%;
+  margin: 0 auto;
 }
 
-#CoPage p {
-  margin-bottom: 0.5em;
+#CoPage h3 {
+  padding: 0 5%;
+  margin: 1em 0 0.5em 0;
+}
+#CoPage h2 {
+  background-color: #f8fcff;
+  padding: 0.5em 5%;
+  margin: 1em 0 0.5em 0;
+}
+#CoPage p,
+#CoPage a {
+  padding: 0 5%;
+  color: rgb(77, 77, 77);
+}
+
+.CoPage_container {
 }

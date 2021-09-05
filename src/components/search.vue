@@ -15,13 +15,12 @@
             v-for="industry in industries"
             v-bind:key="industry"
           >
-            <h4>{{ industry.name }}</h4>
             <div
               class="category__services"
               v-for="serviceKind in industry.serviceKinds"
               v-bind:key="serviceKind"
             >
-              <h5>{{ serviceKind.name }}</h5>
+              <h4>{{ serviceKind.name }}</h4>
               <div
                 class="radio__categories"
                 v-for="service in serviceKind.services"

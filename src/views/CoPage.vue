@@ -1,7 +1,8 @@
 <template>
   <!-- 企業詳細ページ -->
-  <div>
-    <section id="CoPage">
+
+  <section id="CoPage">
+    <div class="CoPage_container">
       <span v-on:click="LikeFunction()">
         <span v-if="liked">★</span>
         <span v-else>☆</span>
@@ -35,11 +36,11 @@
         <p>{{ corporation.profile }}</p>
         <h2>企業実績</h2>
         <p>{{ corporation.businessResults }}</p>
-
+        <h3>ホームページ</h3>
         <a v-bind:href="corporation.url">{{ corporation.url }}</a>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 </template>
 
 <script>

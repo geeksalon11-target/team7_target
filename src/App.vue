@@ -44,13 +44,12 @@ p {
 }
 /* 共通設定 */
 main {
-  width: 95%;
+  width: 100%;
   margin: 0 auto;
   height: 100%;
 }
 
 body {
-  background-color: #eee;
 }
 
 /* style.css */
