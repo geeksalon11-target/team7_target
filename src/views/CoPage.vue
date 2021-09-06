@@ -2,11 +2,11 @@
   <!-- 企業詳細ページ -->
   <div>
     <section>
-        <span v-on:click="LikeFunction()">
-          <span v-if="liked">★</span>
-          <span v-else>☆</span>
-        </span>
-        <h2>{{ resultName }}</h2>
+      <span v-on:click="toggleLiekd()">
+        <span v-if="liked">★</span>
+        <span v-else>☆</span>
+      </span>
+      <h2>{{ resultName }}</h2>
       <div v-for="corporation in coResults" v-bind:key="corporation.id">
         <h4>業種</h4>
         <div
@@ -53,84 +53,84 @@ export default {
       resultName: this.$route.query.name,
       resultKana: this.$route.query.nameKana,
       resultId: this.$route.params.id,
-      userData:[],
-      liked:false,
-      initialLength:0,
-      userID:""
+      userData: [],
+      liked: false,
+      initialLength: 0,
+      userID: "",
     };
   },
-  created: async function() {
+  created: async function () {
     // firebase get
-    this.getUserID()
-    this.getCorp()
+    this.getUserID();
+    this.getCorp();
   },
-  methods:{
-    LikeFunction:function(){
-      this.liked=!this.liked
-       this.returnUserData()
+  methods: {
+    LikeFunction: function () {
+      this.liked = !this.liked;
+      this.returnUserData();
     },
-    getUserID: function(){
+    getUserID: function () {
       const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        // ログインしていれば中通る
-        this.userID = user.uid
-        this.getUser(user.uid)
-      }
-      // 登録解除
-      unsubscribe();
+        if (user) {
+          // ログインしていれば中通る
+          this.userID = user.uid;
+          this.getUser(user.uid);
+        }
+        // 登録解除
+        unsubscribe();
       });
     },
-    getCorp: function(){
-       // 企業名で絞込
-         this.axios
-          .get(
-            "https://u10sme-api.smrj.go.jp/v1/corporations.json?limit=100&keywords=" +
-              this.resultKana
-          )
-          .then((response) => {
-            this.corporations = response.data.corporations
-          })
-          .catch((error) => console.log(error));
+    getCorp: function () {
+      // 企業名で絞込
+      this.axios
+        .get(
+          "https://u10sme-api.smrj.go.jp/v1/corporations.json?limit=100&keywords=" +
+            this.resultKana
+        )
+        .then((response) => {
+          this.corporations = response.data.corporations;
+        })
+        .catch((error) => console.log(error));
     },
-    getUser: async function(userID){
+    getUser: async function (userID) {
       firebase
-      .firestore()
-      .collection("users")
-      .doc(userID)
-      .get()
-      .then((doc) => {
-        this.userData = doc.data()
-        // 初期のいいねした企業数を保存
-        this.initialLength = doc.data().likeCorp.length
-        for (let i = 0; i < doc.data().likeCorp.length; i++) {
-          if(this.resultId == doc.data().likeCorp[i]){
-            this.LikeFunction()
+        .firestore()
+        .collection("users")
+        .doc(userID)
+        .get()
+        .then((doc) => {
+          this.userData = doc.data();
+          // 初期のいいねした企業数を保存
+          this.initialLength = doc.data().likeCorp.length;
+          for (let i = 0; i < doc.data().likeCorp.length; i++) {
+            if (this.resultId == doc.data().likeCorp[i]) {
+              this.LikeFunction();
+            }
           }
-        }
-      })
+        });
     },
-    returnUserData:function(){
+    returnUserData: function () {
       // いいねの付けはずし
-      if(this.liked){
-        this.userData.likeCorp.push(this.resultId)
-      }else {
+      if (this.liked) {
+        this.userData.likeCorp.push(this.resultId);
+      } else {
         console.log("false");
         for (let i = 0; i < this.userData.likeCorp.length; i++) {
-        if(this.resultId == this.userData.likeCorp[i]){
-          this.userData.likeCorp.splice(i,1)
+          if (this.resultId == this.userData.likeCorp[i]) {
+            this.userData.likeCorp.splice(i, 1);
+          }
         }
       }
-      }
       if (this.initialLength == this.userData.likeCorp.length) {
-        return false
+        return false;
       }
       // firestore
-     firebase
-      .firestore()
-      .collection("users")
-      .doc(this.userID)
-      .set(this.userData)
-    }
+      firebase
+        .firestore()
+        .collection("users")
+        .doc(this.userID)
+        .set(this.userData);
+    },
   },
   computed: {
     // 企業IDを照会
@@ -144,7 +144,7 @@ export default {
 </script>
 
 <style>
-  .span{
-    color: yellow;
-  }
+.span {
+  color: yellow;
+}
 </style>
