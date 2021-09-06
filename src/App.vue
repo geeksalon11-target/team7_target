@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <router-link to="/mypage">マイページ</router-link>
     <img alt="Vue logo" src="./assets/logo.png" />
     <router-view />
   </div>

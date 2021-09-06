@@ -5,6 +5,8 @@ import Casearch from "../views/CaSearch.vue";
 import Copage from "../views/CoPage.vue";
 import In from "../views/In.vue";
 import Up from "../views/Up.vue";
+import Mypage from "../views/Mypage.vue";
+import Edit from "../views/Edit.vue";
 
 Vue.use(VueRouter);
 
@@ -43,6 +45,16 @@ const routes = [
     path: "/up",
     name: "Up",
     component: Up,
+  },
+  {
+    path: "/mypage",
+    name: "mypage",
+    component: Mypage,
+  },
+  {
+    path: "/edit",
+    name: "edit",
+    component: Edit,
   },
 ];
 
