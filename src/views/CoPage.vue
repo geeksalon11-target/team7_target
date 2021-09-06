@@ -2,9 +2,11 @@
   <!-- 企業詳細ページ -->
   <div>
     <section>
-        <span v-on:click="LikeFunction()">
-          <span v-if="liked">★</span>
-          <span v-else>☆</span>
+        <span v-on:click="LikeFunction()"> 
+          <span class="star1" v-if="liked">★</span>
+          <span class="star2" v-else>☆</span>
+          <!-- <i v-on:click="LikeFunction()" class="fas fa-star" v-if="liked"></i>
+          <i v-on:click="LikeFunction()" class="far fa-star" v-else></i> -->
         </span>
         <h2>{{ resultName }}</h2>
       <div v-for="corporation in coResults" v-bind:key="corporation.id">
@@ -42,6 +44,7 @@
   </div>
 </template>
 
+<script src="https://kit.fontawesome.com/1987eb875f.js" crossorigin="anonymous"></script>
 <script>
 import firebase from "firebase";
 
@@ -144,7 +147,12 @@ export default {
 </script>
 
 <style>
-  .span{
-    color: yellow;
+  .star1{
+    color: #FF9900;
+    font-size: 200%;
   }
+  .star2{
+    font-size: 200%;
+  }
+
 </style>
