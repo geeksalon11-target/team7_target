@@ -1,36 +1,49 @@
 <template>
   <div id="CategorySearch">
-    <h2>条件検索</h2>
     <!-- 条件検索エリア -->
 
     <section id="list__categories">
       <!-- 業種（industryーservice） から検索-->
-      <div>
-        <h3 class="categories" v-on:click="clickIndustry">業種から探す↓</h3>
+      <div class="category_index">
+        <button
+          v-bind:disabled="Disabled"
+          class="categories"
+          v-on:click="clickIndustry"
+        >
+          業種▼
+        </button>
+        <button
+          v-bind:disabled="Disabled"
+          class="categories"
+          v-on:click="clickArea"
+        >
+          地域▼
+        </button>
+      </div>
 
-        <div v-if="clickedIndustry">
+      <div class="clickedIndustry" v-if="clickedIndustry">
+        <div class="category__scroll">
           <div
             class="category__industries"
             v-for="industry in industries"
             v-bind:key="industry"
           >
-            <h4>{{ industry.name }}</h4>
             <div
               class="category__services"
               v-for="serviceKind in industry.serviceKinds"
               v-bind:key="serviceKind"
             >
-              <h5>{{ serviceKind.name }}</h5>
+              <h4>{{ serviceKind.name }}</h4>
               <div
                 class="radio__categories"
                 v-for="service in serviceKind.services"
                 v-bind:key="service"
               >
                 <input
-                  type="radio"
+                  type="checkbox"
                   name="service"
-                  v-bind:value="service.name"
-                  v-on:change="clickSer(service.id)"
+                  v-bind:value="{ id: service.id, name: service.name }"
+                  v-model="checkedValues"
                   v-bind:id="service.id"
                 />
                 <label> {{ service.name }}</label>
@@ -38,12 +51,15 @@
             </div>
           </div>
         </div>
+        <div class="searchSer">
+          <button v-on:click="searchSer">検索</button>
+        </div>
       </div>
-      <!-- 地域（areaーprefecture）から探す -->
-      <div>
-        <h3 class="categories" v-on:click="clickArea">地域から探す↓</h3>
 
-        <div v-if="clickedArea">
+      <!-- 地域（areaーprefecture）から探す -->
+
+      <div class="clickedArea" v-if="clickedArea">
+        <div class="category__scroll">
           <div
             class="category__prefectures"
             v-for="area in areas"
@@ -60,19 +76,57 @@
                 type="radio"
                 name="prefecture"
                 v-bind:value="prefecture.name"
-                v-on:change="clickPre(prefecture.name)"
+                v-model="radioValue"
                 v-bind:id="prefecture.code"
               />
               <label v-bind:for="prefecture.code"> {{ prefecture.name }}</label>
             </div>
           </div>
         </div>
+        <div class="searchPre">
+          <button v-on:click="searchPre">検索</button>
+        </div>
       </div>
     </section>
 
     <!-- 検索結果表示エリア -->
+
     <section v-if="clickedCategory" id="list__corporations">
-      <div v-for="corporation in corporations" v-bind:key="corporation">
+      <div class="list_corporation">
+        <p class="searchWord">
+          <span>🔍{{ searchWord }}&nbsp;検索結果</span>
+        </p>
+        <!-- 絞り込み検索オプション -->
+        <div class="add_clear">
+          <div v-if="clickedCategoryA">
+            <input
+              type="text"
+              v-model="keywords"
+              placeholder="絞込キーワードを入力"
+            />
+            <button v-on:click="addKeywordsA()">絞り込み検索</button>
+          </div>
+          <div v-if="clickedCategoryS">
+            <input
+              type="text"
+              v-model="keywords"
+              placeholder="絞込キーワードを入力"
+            />
+            <button v-on:click="addKeywordsS()">絞り込み検索</button>
+          </div>
+          <button v-on:click="Category_clear" class="category_clear">
+            条件をクリア↺
+          </button>
+        </div>
+        <!-- --- -->
+        <p>全{{ corporations.length }}件/{{ currentPage }}ページ目</p>
+      </div>
+
+      <div
+        class="list_corporation"
+        v-for="corporation in getCorporations"
+        v-bind:key="corporation"
+      >
         <router-link
           :to="{
             name: 'Copage',
@@ -86,20 +140,36 @@
         >
           <h3>{{ corporation.name }}</h3></router-link
         >
-        <div
-          v-for="serviceCategory in corporation.serviceCategories"
-          v-bind:key="serviceCategory"
-        >
+
+        <div class="serviceCategory">
+          <p class="tag">業種</p>
           <div
-            v-for="serviceKind in serviceCategory.serviceKinds"
-            v-bind:key="serviceKind"
+            v-for="serviceCategory in corporation.serviceCategories"
+            v-bind:key="serviceCategory"
           >
-            <p>＜{{ serviceKind.name }}＞</p>
+            <ul
+              v-for="serviceKind in serviceCategory.serviceKinds"
+              v-bind:key="serviceKind"
+            >
+              <li>{{ serviceKind.name }}&nbsp;</li>
+            </ul>
           </div>
         </div>
 
-        <p>{{ corporation.location.address }}</p>
+        <p><span class="tag">本社</span>{{ corporation.location.address }}</p>
       </div>
+      <paginate
+        :page-count="getPageCount"
+        :page-range="3"
+        :margin-pages="2"
+        :click-handler="clickCallback"
+        :prev-text="'＜'"
+        :next-text="'＞'"
+        :container-class="'pagination'"
+        :page-class="'page-item'"
+        :active-class="'current'"
+      >
+      </paginate>
     </section>
   </div>
 </template>
@@ -111,7 +181,16 @@ export default {
       clickedIndustry: false,
       clickedArea: false,
       clickedCategory: false,
-      isSelected: false,
+      Disabled: false,
+      clickedCategoryA: false,
+      clickedCategoryS: false,
+      parPage: 10,
+      currentPage: 1,
+      searchWord: "",
+      checkedValueId: [],
+      checkedValueName: [],
+      checkedValues: [],
+      radioValue: "",
       areas: [],
       industries: [],
       corporations: [],
@@ -128,7 +207,16 @@ export default {
       .then((response) => (this.areas = response.data.areas))
       .catch((error) => console.log(error));
   },
-
+  computed: {
+    getCorporations() {
+      let current = this.currentPage * this.parPage;
+      let start = current - this.parPage;
+      return this.corporations.slice(start, current);
+    },
+    getPageCount() {
+      return Math.ceil(this.corporations.length / this.parPage);
+    },
+  },
   methods: {
     // 表示・非表示の切り替え
     clickIndustry() {
@@ -139,43 +227,77 @@ export default {
       this.clickedArea = true;
       this.clickedIndustry = false;
     },
-    clickSer(id) {
-      // ラジオボタン選択時動作（service）
+
+    searchSer() {
+      // チェックボックス選択時動作（service）
+      let checkedCount = this.checkedValues.length;
+      for (let i = 0; i < checkedCount; i++) {
+        this.checkedValueId[i] = this.checkedValues[i].id;
+        this.checkedValueName[i] = this.checkedValues[i].name;
+      }
       let url =
-        "https://u10sme-api.smrj.go.jp/v1/corporations.json?services=" + id;
+        "https://u10sme-api.smrj.go.jp/v1/corporations.json?limit=100&services=" +
+        this.checkedValueId;
       this.axios
         .get(url)
         .then((response) => (this.corporations = response.data.corporations))
 
         .catch((error) => console.log(error));
+      this.searchWord = this.checkedValueName;
       this.clickedCategory = true;
+      this.clickedArea = false;
+      this.clickedIndustry = false;
+      this.Disabled = true;
+      this.clickedCategoryS = true;
     },
-    clickPre(name) {
+
+    searchPre() {
       // ラジオボタン選択時動作（prefecture）
       let url =
-        "https://u10sme-api.smrj.go.jp/v1/corporations.json?location=" + name;
+        "https://u10sme-api.smrj.go.jp/v1/corporations.json?limit=100&location=" +
+        this.radioValue;
 
       this.axios
         .get(url)
         .then((response) => (this.corporations = response.data.corporations))
 
         .catch((error) => console.log(error));
+      this.searchWord = this.radioValue;
       this.clickedCategory = true;
+      this.clickedArea = false;
+      this.clickedIndustry = false;
+      this.Disabled = true;
+      this.clickedCategoryA = true;
+    },
+    addKeywordsA() {
+      let url =
+        "https://u10sme-api.smrj.go.jp/v1/corporations.json?limit=100&location=" +
+        this.radioValue +
+        "&keywords=" +
+        this.keywords;
+      this.axios.get(url).then((response) => {
+        this.corporations = response.data.corporations;
+      });
+    },
+    addKeywordsS() {
+      let url =
+        "https://u10sme-api.smrj.go.jp/v1/corporations.json?limit=100&services=" +
+        this.checkedValueId +
+        "&keywords=" +
+        this.keywords;
+      this.axios.get(url).then((response) => {
+        this.corporations = response.data.corporations;
+      });
+    },
+
+    Category_clear() {
+      location.reload(true);
+    },
+    clickCallback(pageNum) {
+      this.currentPage = Number(pageNum);
     },
   },
 };
 </script>
 
-<style>
-section#list__categories {
-  border-bottom: solid 1px;
-}
-.category__prefectures,
-.category__industries,
-.category__services {
-  overflow: hidden;
-}
-.radio__categories {
-  float: left;
-}
-</style>
+<style></style>
