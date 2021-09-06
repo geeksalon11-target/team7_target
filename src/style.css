@@ -3,8 +3,9 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  background-color: #fff;
+  background-color: #59aff1;
 }
+
 .nav__content {
   width: 200px;
   padding: 1em 0;
@@ -13,7 +14,7 @@
 }
 
 .nav__content a {
-  color: #111;
+  color: #fff;
   text-decoration: none;
 }
 /* メインビジュアルエリア */
@@ -24,23 +25,23 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#91cfff+0,ffffff+100&1+0,0+100 */
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#59aff1+0,ffffff+100&1+0,0+100 */
   background: -moz-linear-gradient(
     top,
-    rgba(145, 207, 255, 1) 0%,
-    rgba(255, 255, 255, 0) 100%
+    #59aff1 0%,
+    #f3f8fc 100%
   ); /* FF3.6-15 */
   background: -webkit-linear-gradient(
     top,
-    rgba(145, 207, 255, 1) 0%,
-    rgba(255, 255, 255, 0) 100%
+    #59aff1 0%,
+    #f3f8fc 100%
   ); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(
     to bottom,
-    rgba(145, 207, 255, 1) 0%,
-    rgba(255, 255, 255, 0) 100%
+    #59aff1 0%,
+    #f3f8fc 100%
   ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#91cfff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#59aff1', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
 }
 
 .site_title {
@@ -52,7 +53,7 @@
   width: 100%;
 }
 #SearchTools_index a {
-  color: #91cfff;
+  color: #59aff1;
   font-weight: bold;
 }
 #SearchTools_index li {
@@ -61,9 +62,18 @@
   padding: 1em 0;
   font-size: 18px;
 }
+.another_index {
+  border-bottom: 1px solid #59aff1;
+  background-color: #f3f8fc;
+}
 .current_index {
-  background-color: #91cfff;
-  color: #fff;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  background-color: #fff;
+  border-top: 1px solid #59aff1;
+  border-left: 1px solid #59aff1;
+  border-right: 1px solid #59aff1;
+  color: #59aff1;
   font-weight: bold;
 }
 
@@ -78,8 +88,7 @@
 }
 .input_keywords,
 .category_index {
-  background-color: #91cfff;
-  border-bottom: double 8px #fff;
+  background-color: #fff;
 }
 /* search */
 .category_index {
@@ -88,16 +97,23 @@
   text-align: center;
 }
 .categories {
-  padding: 1em 0;
-  width: 25%;
-  color: #fff;
-  background-color: #91cfff;
-  border: none;
+  margin: 1em 0;
+  padding: 0.5em 0;
+  width: 100px;
+  background-color: #f3f8fc;
+  color: #59aff1;
+  border: 1px solid #59aff1;
+  border-radius: 3px;
   font-size: 16px;
   font-weight: bold;
 }
+.categories:nth-child(1) {
+  margin-right: 2em;
+}
 .categories:disabled {
-  color: rgba(255, 255, 255, 0.5);
+  color: #59aff15e;
+  border: none;
+  background-color: #fff;
 }
 
 .category__scroll {
@@ -105,7 +121,7 @@
   overflow: scroll;
   overflow-x: hidden;
   padding: 0 5%;
-  background-color: #f8fcff;
+  background-color: #f3f8fc;
 }
 .category__prefectures,
 .category__industries,
@@ -147,6 +163,9 @@
 }
 .category_clear {
   margin-left: 1em;
+  border: solid 1px #f1bc59;
+  background-color: #f1bc5957;
+  border-radius: 3px;
 }
 
 .searchWord span {
@@ -155,8 +174,8 @@
   font-size: 16px;
 }
 
-.list_corporation:nth-child(odd) {
-  background-color: #f8fcff;
+.list_corporation:nth-child(even) {
+  background-color: #f3f8fc;
 }
 .list_corporation p,
 .list_corporation li {
@@ -181,11 +200,11 @@
   justify-content: center;
   list-style: none;
   font-weight: bold;
-  color: #91cfff;
+  color: #59aff1;
   margin: 1em 0;
 }
 .current {
-  background-color: #91cfff;
+  background-color: #59aff1;
   color: #fff;
   border-radius: 22px;
 }
@@ -199,10 +218,14 @@
 
 /* 企業詳細ページ */
 
+.CoPage_container {
+  margin-top: 1em;
+}
+
 #CoPage h1 {
   font-size: 26px;
-  border-bottom: 2px solid #91cfff;
-  border-left: 10px solid #91cfff;
+  border-bottom: 2px solid #59aff1;
+  border-left: 10px solid #59aff1;
   padding-left: 10px;
   width: 90%;
   margin: 0 auto;
@@ -213,7 +236,7 @@
   margin: 1em 0 0.5em 0;
 }
 #CoPage h2 {
-  background-color: #f8fcff;
+  background-color: #f3f8fc;
   padding: 0.5em 5%;
   font-size: 22px;
   margin: 1em 0 0.5em 0;
@@ -222,18 +245,9 @@
 #CoPage a {
   padding: 0 5%;
 }
-#CoPage table {
-  padding: 0 5%;
-  vertical-align: middle;
-  width: 100%;
-}
-#CoPage table h3,
-#CoPage table p,
-#CoPage table a {
-  margin: 0;
-  padding: 0.5em 0;
-}
+
 .lastUpdateTime {
   text-align: right;
   font-size: 14px;
+  margin: 1em 0;
 }

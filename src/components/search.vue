@@ -10,14 +10,14 @@
           class="categories"
           v-on:click="clickIndustry"
         >
-          業種▽
+          業種▼
         </button>
         <button
           v-bind:disabled="Disabled"
           class="categories"
           v-on:click="clickArea"
         >
-          地域▽
+          地域▼
         </button>
       </div>
 
@@ -115,7 +115,7 @@
             <button v-on:click="addKeywordsS()">絞り込み検索</button>
           </div>
           <button v-on:click="Category_clear" class="category_clear">
-            条件をクリア
+            条件をクリア↺
           </button>
         </div>
         <!-- --- -->

@@ -3,11 +3,11 @@
 
   <section id="CoPage">
     <div class="CoPage_container">
+      <h1>{{ resultName }}</h1>
       <span v-on:click="LikeFunction()">
         <span v-if="liked">★</span>
         <span v-else>☆</span>
       </span>
-      <h1>{{ resultName }}</h1>
       <div v-for="corporation in coResults" v-bind:key="corporation.id">
         <h3>業種</h3>
         <div
@@ -35,38 +35,27 @@
         <h2>企業実績</h2>
         <p>{{ corporation.businessResults }}</p>
         <h2>会社データ</h2>
-        <table>
-          <tr>
-            <td><h3>会社名</h3></td>
-            <td>
-              <p>{{ corporation.name }}</p>
-            </td>
-          </tr>
-          <tr>
-            <td><h3>設立日</h3></td>
-            <td>
-              <p>{{ corporation.foundationDate }}</p>
-            </td>
-          </tr>
-          <tr>
-            <td><h3>資本金</h3></td>
-            <td>
-              <p>{{ corporation.capital }}円</p>
-            </td>
-          </tr>
-          <tr>
-            <td><h3>本店所在地</h3></td>
-            <td>
-              <p>{{ corporation.location.address }}</p>
-            </td>
-          </tr>
-          <tr>
-            <td><h3>ホームページ</h3></td>
-            <td>
-              <a v-bind:href="corporation.url">{{ corporation.url }}</a>
-            </td>
-          </tr>
-        </table>
+
+        <h3>会社名</h3>
+
+        <p>{{ corporation.name }}</p>
+
+        <h3>設立日</h3>
+
+        <p>{{ corporation.foundationDate }}</p>
+
+        <h3>資本金</h3>
+
+        <p>{{ corporation.capital }}円</p>
+
+        <h3>本店所在地</h3>
+
+        <p>{{ corporation.location.address }}</p>
+
+        <h3>ホームページ</h3>
+
+        <a v-bind:href="corporation.url">{{ corporation.url }}</a>
+
         <p class="lastUpdateTime">
           ※最終更新日：{{ corporation.lastUpdateTime }}
         </p>
