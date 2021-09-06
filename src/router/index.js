@@ -70,11 +70,6 @@ router.beforeEach((to, from, next) => {
         // 認証されていない場合、認証画面へ
       //   next({ name: "In" })
       // }
-      // if (user) {
-      //   next()
-      // }else{
-      // next({name:"In"});
-      // }
     })
 });
 
