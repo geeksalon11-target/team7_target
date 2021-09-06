@@ -48,7 +48,7 @@ import firebase from "firebase";
 
 export default {
   methods: {
-    signUp: function() {
+    signUp: function () {
       firebase
         .auth()
         .createUserWithEmailAndPassword(this.mailaddress, this.password)
