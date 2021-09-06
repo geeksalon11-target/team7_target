@@ -47,6 +47,16 @@
 import firebase from "firebase";
 
 export default {
+  data: function () {
+    return {
+      mailaddress: "",
+      password: "",
+      name: "",
+      area: "",
+      syokusyu: "",
+      gyousyu: "",
+    };
+  },
   methods: {
     signUp: function () {
       firebase
@@ -74,8 +84,8 @@ export default {
         })
         .catch(
           // エラー時の処理
-          () => {
-            alert("エラー");
+          (error) => {
+            alert(error);
           }
         );
     },
