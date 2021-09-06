@@ -1,6 +1,5 @@
 <template>
   <!-- 企業詳細ページ -->
-<<<<<<< HEAD
 
   <section id="CoPage">
     <div class="CoPage_container">
@@ -9,15 +8,6 @@
         <span v-if="liked">★</span>
         <span v-else>☆</span>
       </span>
-=======
-  <div>
-    <section>
-      <span v-on:click="toggleLiekd()">
-        <span v-if="liked">★</span>
-        <span v-else>☆</span>
-      </span>
-      <h2>{{ resultName }}</h2>
->>>>>>> 53deaa7ad18b335c30351796d3be38f147ce1974
       <div v-for="corporation in coResults" v-bind:key="corporation.id">
         <h3>業種</h3>
         <div
@@ -175,12 +165,4 @@ export default {
 };
 </script>
 
-<<<<<<< HEAD
 <style></style>
-=======
-<style>
-.span {
-  color: yellow;
-}
-</style>
->>>>>>> 53deaa7ad18b335c30351796d3be38f147ce1974
