@@ -67,7 +67,7 @@
   font-weight: bold;
 }
 
-/* CoPage search */
+/* CoPage */
 #Coinfo,
 #CategorySearch {
 }
@@ -81,7 +81,7 @@
   background-color: #91cfff;
   border-bottom: double 8px #fff;
 }
-
+/* search */
 .category_index {
   display: flex;
   justify-content: center;
@@ -105,7 +105,15 @@
   overflow: scroll;
   overflow-x: hidden;
   padding: 0 5%;
-  background-color: #fff;
+  background-color: #f8fcff;
+}
+.category__prefectures,
+.category__industries,
+.category__services {
+  overflow: hidden;
+}
+.radio__categories {
+  float: left;
 }
 .clickedIndustry,
 .clickedArea {
@@ -122,21 +130,23 @@
 }
 .list_corporation {
   padding: 1em 5%;
-  background-color: #f8fcff;
 }
 
 .searchWord {
   margin: 0 auto;
-  padding: 1em 0;
+  padding-bottom: 1em;
   width: 100%;
   text-align: center;
   line-height: 2.5em;
   font-size: 14px;
-  background-color: #f8fcff;
+}
+.add_clear {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1em;
 }
 .category_clear {
-  float: right;
-  margin-right: 5%;
+  margin-left: 1em;
 }
 
 .searchWord span {
@@ -145,8 +155,8 @@
   font-size: 16px;
 }
 
-.list_corporation:nth-child(even) {
-  background-color: #fff;
+.list_corporation:nth-child(odd) {
+  background-color: #f8fcff;
 }
 .list_corporation p,
 .list_corporation li {

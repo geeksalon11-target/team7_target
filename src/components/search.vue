@@ -42,7 +42,7 @@
                 <input
                   type="checkbox"
                   name="service"
-                  v-bind:value="service.id"
+                  v-bind:value="{ id: service.id, name: service.name }"
                   v-model="checkedValues"
                   v-bind:id="service.id"
                 />
@@ -92,14 +92,35 @@
     <!-- 検索結果表示エリア -->
 
     <section v-if="clickedCategory" id="list__corporations">
-      <p class="searchWord">
-        <span>🔍{{ searchWord }}&nbsp;検索結果</span><br />全{{
-          corporations.length
-        }}件/{{ currentPage }}ページ目
-      </p>
-      <button v-on:click="Category_clear" class="category_clear">
-        条件をクリア
-      </button>
+      <div class="list_corporation">
+        <p class="searchWord">
+          <span>🔍{{ searchWord }}&nbsp;検索結果</span>
+        </p>
+        <!-- 絞り込み検索オプション -->
+        <div class="add_clear">
+          <div v-if="clickedCategoryA">
+            <input
+              type="text"
+              v-model="keywords"
+              placeholder="絞込キーワードを入力"
+            />
+            <button v-on:click="addKeywordsA()">絞り込み検索</button>
+          </div>
+          <div v-if="clickedCategoryS">
+            <input
+              type="text"
+              v-model="keywords"
+              placeholder="絞込キーワードを入力"
+            />
+            <button v-on:click="addKeywordsS()">絞り込み検索</button>
+          </div>
+          <button v-on:click="Category_clear" class="category_clear">
+            条件をクリア
+          </button>
+        </div>
+        <!-- --- -->
+        <p>全{{ corporations.length }}件/{{ currentPage }}ページ目</p>
+      </div>
 
       <div
         class="list_corporation"
@@ -161,11 +182,15 @@ export default {
       clickedArea: false,
       clickedCategory: false,
       Disabled: false,
+      clickedCategoryA: false,
+      clickedCategoryS: false,
       parPage: 10,
       currentPage: 1,
       searchWord: "",
+      checkedValueId: [],
+      checkedValueName: [],
       checkedValues: [],
-      radioValues: "",
+      radioValue: "",
       areas: [],
       industries: [],
       corporations: [],
@@ -205,19 +230,25 @@ export default {
 
     searchSer() {
       // チェックボックス選択時動作（service）
+      let checkedCount = this.checkedValues.length;
+      for (let i = 0; i < checkedCount; i++) {
+        this.checkedValueId[i] = this.checkedValues[i].id;
+        this.checkedValueName[i] = this.checkedValues[i].name;
+      }
       let url =
         "https://u10sme-api.smrj.go.jp/v1/corporations.json?limit=100&services=" +
-        this.checkedValues;
+        this.checkedValueId;
       this.axios
         .get(url)
         .then((response) => (this.corporations = response.data.corporations))
 
         .catch((error) => console.log(error));
-
+      this.searchWord = this.checkedValueName;
       this.clickedCategory = true;
       this.clickedArea = false;
       this.clickedIndustry = false;
       this.Disabled = true;
+      this.clickedCategoryS = true;
     },
 
     searchPre() {
@@ -236,7 +267,29 @@ export default {
       this.clickedArea = false;
       this.clickedIndustry = false;
       this.Disabled = true;
+      this.clickedCategoryA = true;
     },
+    addKeywordsA() {
+      let url =
+        "https://u10sme-api.smrj.go.jp/v1/corporations.json?limit=100&location=" +
+        this.radioValue +
+        "&keywords=" +
+        this.keywords;
+      this.axios.get(url).then((response) => {
+        this.corporations = response.data.corporations;
+      });
+    },
+    addKeywordsS() {
+      let url =
+        "https://u10sme-api.smrj.go.jp/v1/corporations.json?limit=100&services=" +
+        this.checkedValueId +
+        "&keywords=" +
+        this.keywords;
+      this.axios.get(url).then((response) => {
+        this.corporations = response.data.corporations;
+      });
+    },
+
     Category_clear() {
       location.reload(true);
     },
@@ -247,13 +300,4 @@ export default {
 };
 </script>
 
-<style>
-.category__prefectures,
-.category__industries,
-.category__services {
-  overflow: hidden;
-}
-.radio__categories {
-  float: left;
-}
-</style>
+<style></style>

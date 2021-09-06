@@ -11,11 +11,12 @@
       </div>
 
       <section id="list__corporations" v-if="clickedKensaku">
-        <p class="searchWord">
-          <span>🔍「{{ searchWord }}」&nbsp;検索結果</span><br />全{{
-            corporations.length
-          }}件/{{ currentPage }}ページ目
-        </p>
+        <div class="list_corporation">
+          <p class="searchWord">
+            <span>🔍「{{ searchWord }}」&nbsp;検索結果</span>
+          </p>
+          <p>全{{ corporations.length }}件/{{ currentPage }}ページ目</p>
+        </div>
         <div
           class="list_corporation"
           v-for="corporation in getCorporations"
