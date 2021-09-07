@@ -62,14 +62,14 @@ router.beforeEach((to, from, next) => {
     firebase.auth().onAuthStateChanged( (user) => {
       console.log(user)
       next()
-      // if (user) {
-      //   console.log("if")
-      //   next()
-      // } else {
-      //   console.log("else")
+      if (user) {
+        console.log("if")
+        next()
+      } else {
+        console.log("else")
         // 認証されていない場合、認証画面へ
-      //   next({ name: "In" })
-      // }
+        next({ name: "In" })
+      }
     })
 });
 
