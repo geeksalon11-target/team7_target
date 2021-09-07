@@ -1,12 +1,12 @@
 <template>
   <!-- 企業詳細ページ -->
-
+  <div>
   <section id="CoPage">
     <div class="CoPage_container">
       <h1 class="page_title">{{ resultName }}</h1>
       <span v-on:click="LikeFunction()">
-        <span v-if="liked">★</span>
-        <span v-else>☆</span>
+        <span class="star1" v-if="liked">★</span>
+        <span class="star2"v-else>☆</span>
       </span>
       <div v-for="corporation in coResults" v-bind:key="corporation.id">
         <h3>業種</h3>
@@ -64,6 +64,7 @@
   </section>
 </template>
 
+<script src="https://kit.fontawesome.com/1987eb875f.js" crossorigin="anonymous"></script>
 <script>
 import firebase from "firebase";
 
@@ -170,4 +171,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+  .star1{
+    color: #FF9900;
+    font-size: 200%;
+  }
+  .star2{
+    font-size: 200%;
+  }
+</style>

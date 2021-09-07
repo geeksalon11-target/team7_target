@@ -54,11 +54,28 @@ const routes = [
     component: CoLiked,
   },
 ];
+import firebase from "firebase";
 
 const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  console.log("router")
+  console.log(firebase.auth().currentUser)
+    // 認証状態を取得
+    firebase.auth().onAuthStateChanged( (user) => {
+      console.log(user)
+      next()
+      if (user) {
+        console.log("if")
+        next()
+      } else {
+        console.log("else")
+        // 認証されていない場合、認証画面へ
+        next({ name: "In" })
+      }
+    })
 });
 
 export default router;
