@@ -125,8 +125,8 @@ export default {
           // 初期のいいねした企業数を保存
           this.initialLength = doc.data().likeCorp.length;
           for (let i = 0; i < doc.data().likeCorp.length; i++) {
-            if (this.resultId == doc.data().likeCorp[i]) {
-              this.LikeFunction();
+            if (this.resultId == doc.data().likeCorp[i].Corpid) {
+              this.liked = true;
             }
           }
         });
@@ -142,7 +142,7 @@ export default {
       } else {
         console.log("false");
         for (let i = 0; i < this.userData.likeCorp.length; i++) {
-          if (this.resultId == this.userData.likeCorp[i]) {
+          if (this.resultId == this.userData.likeCorp[i].Corpid) {
             this.userData.likeCorp.splice(i, 1);
           }
         }
