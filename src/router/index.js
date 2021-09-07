@@ -7,6 +7,7 @@ import In from "../views/In.vue";
 import Up from "../views/Up.vue";
 import Mypage from "../views/Mypage.vue";
 import Edit from "../views/Edit.vue";
+import CoLiked from "../views/CoLiked.vue";
 
 Vue.use(VueRouter);
 
@@ -46,6 +47,11 @@ const routes = [
     path: "/edit",
     name: "edit",
     component: Edit,
+  },
+  {
+    path: "/coliked",
+    name: "CoLiked",
+    component: CoLiked,
   },
 ];
 import firebase from "firebase";

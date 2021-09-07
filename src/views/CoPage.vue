@@ -2,10 +2,10 @@
   <!-- 企業詳細ページ -->
   <section id="CoPage">
     <div class="CoPage_container">
-      <h1>{{ resultName }}</h1>
+      <h1 class="page_title">{{ resultName }}</h1>
       <span v-on:click="LikeFunction()">
         <span class="star1" v-if="liked">★</span>
-        <span class="star2"v-else>☆</span>
+        <span class="star2" v-else>☆</span>
       </span>
       <div v-for="corporation in coResults" v-bind:key="corporation.id">
         <h3>業種</h3>
@@ -63,7 +63,10 @@
   </section>
 </template>
 
-<script src="https://kit.fontawesome.com/1987eb875f.js" crossorigin="anonymous"></script>
+<script
+  src="https://kit.fontawesome.com/1987eb875f.js"
+  crossorigin="anonymous"
+></script>
 <script>
 import firebase from "firebase";
 
@@ -125,27 +128,32 @@ export default {
           // 初期のいいねした企業数を保存
           this.initialLength = doc.data().likeCorp.length;
           for (let i = 0; i < doc.data().likeCorp.length; i++) {
-            if (this.resultId == doc.data().likeCorp[i]) {
-              this.LikeFunction();
+            if (this.resultId == doc.data().likeCorp[i].Corpid) {
+              this.liked = true;
             }
           }
         });
     },
-    returnUserData: function () {
+    returnUserData() {
       // いいねの付けはずし
       if (this.liked) {
-        this.userData.likeCorp.push(this.resultId);
+        console.log("true");
+        this.userData.likeCorp.push({
+          Corpid: this.resultId,
+          Corpname: this.resultName,
+          Corpkana: this.resultKana,
+        });
       } else {
         console.log("false");
         for (let i = 0; i < this.userData.likeCorp.length; i++) {
-          if (this.resultId == this.userData.likeCorp[i]) {
+          if (this.resultId == this.userData.likeCorp[i].Corpid) {
             this.userData.likeCorp.splice(i, 1);
           }
         }
       }
-      if (this.initialLength == this.userData.likeCorp.length) {
-        return false;
-      }
+      // if (this.initialLength == this.userData.likeCorp.length) {
+      //   return false;
+      // }
       // firestore
       firebase
         .firestore()
@@ -165,12 +173,4 @@ export default {
 };
 </script>
 
-<style>
-  .star1{
-    color: #FF9900;
-    font-size: 200%;
-  }
-  .star2{
-    font-size: 200%;
-  }
-</style>
+<style></style>

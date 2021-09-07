@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-link to="/in" @click="signout">ログアウト</router-link>
+    <div @click="signout"><router-link to="/in">ログアウト</router-link></div>
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 import firebase from "firebase";
 export default {
   methods: {
-    signout: function() {
+    signout: function () {
       firebase
         .auth()
         .signOut()
