@@ -17,6 +17,21 @@
   color: #fff;
   text-decoration: none;
 }
+/* In.vue */
+#In {
+  text-align: center;
+  padding-top: 1em;
+}
+#In h3 {
+  padding-bottom: 0.5em;
+}
+#In button {
+  margin: 0.5em 0;
+}
+.signup table,
+.signin table {
+  margin: 0 auto;
+}
 /* メインビジュアルエリア */
 #top_visual {
   height: 250px;
@@ -243,6 +258,14 @@ h1.page_title {
 #CoPage p,
 #CoPage a {
   padding: 0 5%;
+}
+.star1 {
+  color: #ff9900;
+}
+.star1,
+.star2 {
+  font-size: 200%;
+  padding-left: 5%;
 }
 
 .lastUpdateTime {
