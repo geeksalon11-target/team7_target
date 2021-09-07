@@ -131,9 +131,10 @@ export default {
           }
         });
     },
-    returnUserData: function () {
+    returnUserData() {
       // いいねの付けはずし
       if (this.liked) {
+        console.log("true");
         this.userData.likeCorp.push({
           Corpid: this.resultId,
           Corpname: this.resultName,
@@ -147,9 +148,9 @@ export default {
           }
         }
       }
-      if (this.initialLength == this.userData.likeCorp.length) {
-        return false;
-      }
+      // if (this.initialLength == this.userData.likeCorp.length) {
+      //   return false;
+      // }
       // firestore
       firebase
         .firestore()

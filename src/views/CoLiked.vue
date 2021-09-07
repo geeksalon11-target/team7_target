@@ -19,8 +19,11 @@
             }"
             target="_blank"
           >
-            <h3>{{ likeCor.Corpname }}</h3>
+            <h3>★{{ likeCor.Corpname }}</h3>
           </router-link>
+          <div class="deleteCorp">
+            <button v-on:click="deleteCorp(likeCor.Corpid)">登録解除</button>
+          </div>
         </div>
       </div>
     </section>
@@ -47,8 +50,8 @@ export default {
           .collection("users")
           .doc(this.user.uid)
           .get()
-          .then((docSnapshot) => {
-            this.profile = docSnapshot.data();
+          .then((doc) => {
+            this.profile = doc.data();
             this.likeCorp = this.profile.likeCorp;
           });
       } else {
@@ -56,6 +59,19 @@ export default {
       }
     });
   },
-  method: {},
+  methods: {
+    deleteCorp(deleteId) {
+      for (let i = 0; i < this.profile.likeCorp.length; i++) {
+        if (deleteId == this.profile.likeCorp[i].Corpid) {
+          this.profile.likeCorp.splice(i, 1);
+        }
+      }
+      firebase
+        .firestore()
+        .collection("users")
+        .doc(this.user.uid)
+        .set(this.profile);
+    },
+  },
 };
 </script>
