@@ -219,16 +219,15 @@
 /* 企業詳細ページ */
 
 .CoPage_container {
-  margin-top: 1em;
 }
 
-#CoPage h1 {
+h1.page_title {
   font-size: 26px;
   border-bottom: 2px solid #59aff1;
   border-left: 10px solid #59aff1;
   padding-left: 10px;
   width: 90%;
-  margin: 0 auto;
+  margin: 1em auto 0 auto;
 }
 
 #CoPage h3 {

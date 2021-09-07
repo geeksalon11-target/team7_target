@@ -3,7 +3,7 @@
 
   <section id="CoPage">
     <div class="CoPage_container">
-      <h1>{{ resultName }}</h1>
+      <h1 class="page_title">{{ resultName }}</h1>
       <span v-on:click="LikeFunction()">
         <span v-if="liked">★</span>
         <span v-else>☆</span>
@@ -134,7 +134,11 @@ export default {
     returnUserData: function () {
       // いいねの付けはずし
       if (this.liked) {
-        this.userData.likeCorp.push(this.resultId);
+        this.userData.likeCorp.push({
+          Corpid: this.resultId,
+          Corpname: this.resultName,
+          Corpkana: this.resultKana,
+        });
       } else {
         console.log("false");
         for (let i = 0; i < this.userData.likeCorp.length; i++) {
