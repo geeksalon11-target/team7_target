@@ -1,6 +1,5 @@
 <template>
   <!-- 企業詳細ページ -->
-  <div>
   <section id="CoPage">
     <div class="CoPage_container">
       <h1>{{ resultName }}</h1>
