@@ -1,31 +1,60 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <router-view />
+    <header>
+      <Navbar />
+    </header>
+    <main>
+      <router-view />
+    </main>
   </div>
 </template>
 
-<script></script>
+<script>
+import Navbar from "./components/NavBar.vue";
+export default {
+  components: {
+    Navbar,
+  },
+};
+</script>
 
 <style>
-#app {
+/* #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+} */
+
+/* 初期設定解除 */
+ul {
+  list-style: none;
+}
+body,
+div,
+ul,
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+  padding: 0;
+}
+p {
+  color: rgb(77, 77, 77);
+}
+/* 共通設定 */
+main {
+  width: 100%;
+  margin: 0 auto;
+  height: 100%;
 }
 
-#nav {
-  padding: 30px;
+body {
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+/* style.css */
+@import "./style.css";
 </style>
