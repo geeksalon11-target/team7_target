@@ -78,7 +78,7 @@
   font-size: 18px;
 }
 .another_index {
-  border-bottom: 1px solid #59aff1;
+  border-bottom: 2px solid #59aff15e;
   background-color: #f3f8fc;
 }
 .current_index {
@@ -86,13 +86,13 @@
   border-top-right-radius: 3px;
   background-color: #fff;
   border-top: 1px solid #59aff1;
-  border-left: 1px solid #59aff1;
-  border-right: 1px solid #59aff1;
+  border-left: 2px solid #59aff15e;
+  border-right: 2px solid #59aff15e;
   color: #59aff1;
   font-weight: bold;
 }
 
-/* CoPage */
+/* CoInfo */
 #Coinfo,
 #CategorySearch {
 }
@@ -104,7 +104,25 @@
 .input_keywords,
 .category_index {
   background-color: #fff;
+  border-bottom: 1px solid #59aff15e;
 }
+
+.suggest_keywords {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5em;
+}
+.suggest_keywords li {
+  font-size: 14px;
+  margin: 0.5em 0.5em 0 0.5em;
+  color: #59aff1;
+  font-weight: bold;
+}
+.suggest_keywords li:nth-child(1) {
+  color: rgb(77, 77, 77);
+  font-weight: normal;
+}
+
 /* search */
 .category_index {
   display: flex;
@@ -112,7 +130,7 @@
   text-align: center;
 }
 .categories {
-  margin: 1em 0;
+  margin: 1.5em 0;
   padding: 0.5em 0;
   width: 100px;
   background-color: #f3f8fc;
@@ -192,6 +210,7 @@
 .list_corporation:nth-child(even) {
   background-color: #f3f8fc;
 }
+
 .list_corporation p,
 .list_corporation li {
   color: rgb(77, 77, 77);

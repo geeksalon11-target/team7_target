@@ -7,7 +7,18 @@
           v-model="keywords"
           placeholder="検索キーワードを入力"
         />
-        <button v-on:click="getCompanyNames()">企業を検索する</button>
+        <button v-on:click="getCompanyNames()">検索</button>
+
+        <ul class="suggest_keywords">
+          <li>オススメから探す&nbsp;＞</li>
+          <li v-on:click="selectKeyword(profile.area)">{{ profile.area }}</li>
+          <li v-on:click="selectKeyword(profile.industry)">
+            {{ profile.industry }}
+          </li>
+          <li v-on:click="selectKeyword(profile.occupation)">
+            {{ profile.occupation }}
+          </li>
+        </ul>
       </div>
 
       <section id="list__corporations" v-if="clickedKensaku">
@@ -71,6 +82,7 @@
 </template>
 
 <script>
+import firebase from "firebase";
 import axios from "axios";
 export default {
   data() {
@@ -82,7 +94,25 @@ export default {
       currentPage: 1,
       clickedKensaku: false,
       corporations: [],
+      profile: [],
     };
+  },
+  created() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.user = firebase.auth().currentUser;
+        firebase
+          .firestore()
+          .collection("users")
+          .doc(this.user.uid)
+          .get()
+          .then((doc) => {
+            this.profile = doc.data();
+          });
+      } else {
+        alert("ログインされていません。");
+      }
+    });
   },
   mounted() {
     // 職種&地域検索用APIの取得
@@ -96,6 +126,9 @@ export default {
       .catch((error) => console.log(error));
   },
   methods: {
+    selectKeyword(suggest_Keyword) {
+      this.keywords = suggest_Keyword;
+    },
     getCompanyNames: function () {
       let api =
         "https://u10sme-api.smrj.go.jp/v1/corporations.json?limit=100&keywords=" +

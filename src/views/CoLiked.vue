@@ -54,8 +54,6 @@ export default {
             this.profile = doc.data();
             this.likeCorp = this.profile.likeCorp;
           });
-      } else {
-        alert("ログインされていません。");
       }
     });
   },
