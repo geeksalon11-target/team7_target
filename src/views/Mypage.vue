@@ -3,12 +3,13 @@
     <Signout />
     <button @click="del">アカウントを削除</button>
     <router-link to="/">ホームへ</router-link>
+    <router-link to="/coliked">お気に入り企業一覧</router-link>
     <div v-if="edit">
       <tr>
         <th>名前：</th>
       </tr>
       <tr>
-        <td><input type="text" v-model="name" v-bind="this.profile.name" /></td>
+        <td><input type="text" v-model="name" /></td>
       </tr>
     </div>
 
@@ -20,7 +21,7 @@
         <th>お住まいの地域：</th>
       </tr>
       <tr>
-        <td><input type="text" v-model="area" v-bind="this.profile.area" /></td>
+        <td><input type="text" v-model="area" /></td>
       </tr>
     </div>
 
@@ -33,7 +34,7 @@
       </tr>
       <tr>
         <td>
-          <input type="text" v-model="gyousyu" v-bind="this.profile.industry" />
+          <input type="text" v-model="gyousyu" />
         </td>
       </tr>
     </div>
@@ -47,11 +48,7 @@
       </tr>
       <tr>
         <td>
-          <input
-            type="text"
-            v-model="syokusyu"
-            v-bind="this.profile.occupation"
-          />
+          <input type="text" v-model="syokusyu" />
         </td>
       </tr>
     </div>
@@ -87,12 +84,12 @@ export default {
     };
   },
   methods: {
-    update: function() {
+    update: function () {
       this.user.updateEmail(this.email).then(() => {
         this.user.updatePassword(this.password);
       });
     },
-    pro: function() {
+    pro: function () {
       firebase
         .firestore()
         .collection("users")
@@ -122,13 +119,13 @@ export default {
           this.edit = false;
         });
     },
-    hennsyuu: function() {
+    hennsyuu: function () {
       this.edit = true;
     },
-    discard: function() {
+    discard: function () {
       this.edit = false;
     },
-    del: function() {
+    del: function () {
       firebase
         .firestore()
         .collection("users")
@@ -145,20 +142,26 @@ export default {
         });
     },
   },
-  created: function() {
-    this.name = this.profile.name;
-    this.area = this.profile.area;
-    this.industry = this.profile.industry;
-    this.occupation = this.profile.occupation;
-    this.user = firebase.auth().currentUser;
-    firebase
-      .firestore()
-      .collection("users")
-      .doc(this.user.uid)
-      .get()
-      .then((docSnapshot) => {
-        this.profile = docSnapshot.data();
-      });
+  created: function () {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.user = firebase.auth().currentUser;
+        firebase
+          .firestore()
+          .collection("users")
+          .doc(this.user.uid)
+          .get()
+          .then((docSnapshot) => {
+            this.profile = docSnapshot.data();
+            this.name = this.profile.name;
+            this.area = this.profile.area;
+            this.industry = this.profile.industry;
+            this.occupation = this.profile.occupation;
+          });
+      } else {
+        alert("ログインされていません。");
+      }
+    });
   },
 };
 </script>

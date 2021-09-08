@@ -2,37 +2,37 @@
   <div class="signup">
     <table>
       <tr>
-        <th>メールアドレス：</th>
+        <th>メールアドレス</th>
       </tr>
       <tr>
         <td><input type="email" v-model="mailaddress" /></td>
       </tr>
       <tr>
-        <th>パスワード：</th>
+        <th>パスワード</th>
       </tr>
       <tr>
         <td><input type="password" v-model="password" /></td>
       </tr>
       <tr>
-        <th>名前：</th>
+        <th>名前</th>
       </tr>
       <tr>
         <td><input type="text" v-model="name" /></td>
       </tr>
       <tr>
-        <th>志望職種：</th>
+        <th>志望職種</th>
       </tr>
       <tr>
         <td><input type="text" v-model="syokusyu" /></td>
       </tr>
       <tr>
-        <th>志望業種：</th>
+        <th>志望業種</th>
       </tr>
       <tr>
         <td><input type="text" v-model="gyousyu" /></td>
       </tr>
       <tr>
-        <th>お住まいの地域：</th>
+        <th>お住まいの地域</th>
       </tr>
       <tr>
         <td><input type="text" v-model="area" /></td>
@@ -47,8 +47,18 @@
 import firebase from "firebase";
 
 export default {
+  data: function () {
+    return {
+      mailaddress: "",
+      password: "",
+      name: "",
+      area: "",
+      syokusyu: "",
+      gyousyu: "",
+    };
+  },
   methods: {
-    signUp: function() {
+    signUp: function () {
       firebase
         .auth()
         .createUserWithEmailAndPassword(this.mailaddress, this.password)
@@ -74,8 +84,8 @@ export default {
         })
         .catch(
           // エラー時の処理
-          () => {
-            alert("エラー");
+          (error) => {
+            alert(error);
           }
         );
     },

@@ -1,0 +1,283 @@
+/* ナビゲーション */
+#nav {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #59aff1;
+}
+
+.nav__content {
+  width: 200px;
+  padding: 1em 0;
+
+  text-align: center;
+}
+
+.nav__content a {
+  color: #fff;
+  text-decoration: none;
+}
+/* In.vue */
+#In {
+  text-align: center;
+  padding-top: 1em;
+}
+#In h3 {
+  padding-bottom: 0.5em;
+}
+#In button {
+  margin: 0.5em 0;
+}
+.signup table,
+.signin table {
+  margin: 0 auto;
+}
+/* メインビジュアルエリア */
+#top_visual {
+  height: 250px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#59aff1+0,ffffff+100&1+0,0+100 */
+  background: -moz-linear-gradient(
+    top,
+    #59aff1 0%,
+    #f3f8fc 100%
+  ); /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    top,
+    #59aff1 0%,
+    #f3f8fc 100%
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #59aff1 0%,
+    #f3f8fc 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#59aff1', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
+}
+
+.site_title {
+}
+
+/* 検索方法選択エリア */
+#SearchTools_index {
+  display: flex;
+  width: 100%;
+}
+#SearchTools_index a {
+  color: #59aff1;
+  font-weight: bold;
+}
+#SearchTools_index li {
+  width: 50%;
+  text-align: center;
+  padding: 1em 0;
+  font-size: 18px;
+}
+.another_index {
+  border-bottom: 1px solid #59aff1;
+  background-color: #f3f8fc;
+}
+.current_index {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  background-color: #fff;
+  border-top: 1px solid #59aff1;
+  border-left: 1px solid #59aff1;
+  border-right: 1px solid #59aff1;
+  color: #59aff1;
+  font-weight: bold;
+}
+
+/* CoPage */
+#Coinfo,
+#CategorySearch {
+}
+
+.input_keywords {
+  text-align: center;
+  padding: 20px 0;
+}
+.input_keywords,
+.category_index {
+  background-color: #fff;
+}
+/* search */
+.category_index {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.categories {
+  margin: 1em 0;
+  padding: 0.5em 0;
+  width: 100px;
+  background-color: #f3f8fc;
+  color: #59aff1;
+  border: 1px solid #59aff1;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.categories:nth-child(1) {
+  margin-right: 2em;
+}
+.categories:disabled {
+  color: #59aff15e;
+  border: none;
+  background-color: #fff;
+}
+
+.category__scroll {
+  height: 250px;
+  overflow: scroll;
+  overflow-x: hidden;
+  padding: 0 5%;
+  background-color: #f3f8fc;
+}
+.category__prefectures,
+.category__industries,
+.category__services {
+  overflow: hidden;
+}
+.radio__categories {
+  float: left;
+}
+.clickedIndustry,
+.clickedArea {
+  width: 100%;
+}
+.searchSer,
+.searchPre {
+  margin-top: 0.5em;
+  text-align: center;
+}
+
+/* 検索結果表示エリア */
+#list__corporations {
+}
+.list_corporation {
+  padding: 1em 5%;
+}
+
+.searchWord {
+  margin: 0 auto;
+  padding-bottom: 1em;
+  width: 100%;
+  text-align: center;
+  line-height: 2.5em;
+  font-size: 14px;
+}
+.add_clear {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1em;
+}
+.category_clear {
+  margin-left: 1em;
+  border: solid 1px #f1bc59;
+  background-color: #f1bc5957;
+  border-radius: 3px;
+}
+
+.searchWord span {
+  padding: 0.5em 0;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.list_corporation:nth-child(even) {
+  background-color: #f3f8fc;
+}
+.list_corporation p,
+.list_corporation li {
+  color: rgb(77, 77, 77);
+  font-size: 14px;
+}
+.serviceCategory {
+  display: flex;
+  margin: 0.5em 0;
+}
+.serviceCategory ul {
+  float: left;
+}
+.tag {
+  border-right: solid 1px;
+  margin-right: 0.5em;
+}
+
+/* ページネーション */
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  font-weight: bold;
+  color: #59aff1;
+  margin: 1em 0;
+}
+.current {
+  background-color: #59aff1;
+  color: #fff;
+  border-radius: 22px;
+}
+
+.pagination a {
+  padding: 10px 0;
+  width: 44px;
+  text-align: center;
+  display: block;
+}
+
+/* 企業詳細ページ */
+
+.CoPage_container {
+}
+
+h1.page_title {
+  font-size: 26px;
+  border-bottom: 2px solid #59aff1;
+  border-left: 10px solid #59aff1;
+  padding-left: 10px;
+  width: 90%;
+  margin: 1em auto 0 auto;
+}
+
+#CoPage h3 {
+  padding: 0 5%;
+  margin: 1em 0 0.5em 0;
+}
+#CoPage h2 {
+  background-color: #f3f8fc;
+  padding: 0.5em 5%;
+  font-size: 22px;
+  margin: 1em 0 0.5em 0;
+}
+#CoPage p,
+#CoPage a {
+  padding: 0 5%;
+}
+.star1 {
+  color: #ff9900;
+}
+.star1,
+.star2 {
+  font-size: 200%;
+  padding-left: 5%;
+}
+
+.lastUpdateTime {
+  text-align: right;
+  font-size: 14px;
+  margin: 1em 0;
+}
+
+/* CoLiked */
+#CoLiked .list_corporation {
+  display: flex;
+  justify-content: space-between;
+}
+.deleteCorp {
+}

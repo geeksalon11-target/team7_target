@@ -24,10 +24,12 @@ export default {
   data() {
     return {
       user: {},
+      mail: "",
+      password: "",
     };
   },
   methods: {
-    update: function() {
+    update: function () {
       this.user
         .updateEmail(this.mail)
         .then(() => {
@@ -36,13 +38,18 @@ export default {
         .then(() => {
           this.$router.push("/mypage");
         })
-        .catch(() => {
-          alert("エラー");
+        .catch((error) => {
+          alert(error);
         });
     },
   },
-  created: function() {
-    this.user = firebase.auth().currentUser;
+  created: function () {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.user = firebase.auth().currentUser;
+      }
+      return;
+    });
   },
 };
 </script>

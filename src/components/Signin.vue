@@ -2,13 +2,13 @@
   <div class="signin">
     <table>
       <tr>
-        <th>メールアドレス：</th>
+        <th>メールアドレス</th>
       </tr>
       <tr>
         <td><input type="email" v-model="mailaddress" /></td>
       </tr>
       <tr>
-        <th>パスワード：</th>
+        <th>パスワード</th>
       </tr>
       <tr>
         <td><input type="password" v-model="password" /></td>
@@ -23,7 +23,7 @@
 import firebase from "firebase";
 export default {
   methods: {
-    login: function() {
+    login: function () {
       firebase
         .auth()
         .signInWithEmailAndPassword(this.mailaddress, this.password)
