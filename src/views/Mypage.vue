@@ -3,6 +3,7 @@
     <Signout />
     <button @click="del">アカウントを削除</button>
     <router-link to="/">ホームへ</router-link>
+    <router-link to="/coliked">お気に入り企業一覧</router-link>
     <div v-if="edit">
       <tr>
         <th>名前：</th>
