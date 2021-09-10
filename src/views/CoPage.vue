@@ -84,6 +84,7 @@ export default {
       userID: "",
     };
   },
+
   created: async function () {
     // firebase get
     this.getUserID();
@@ -143,6 +144,7 @@ export default {
           Corpname: this.resultName,
           Corpkana: this.resultKana,
         });
+        alert("お気に入りに登録しました！");
       } else {
         console.log("false");
         for (let i = 0; i < this.userData.likeCorp.length; i++) {

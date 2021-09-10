@@ -1,6 +1,7 @@
 <template>
   <div>
     <TopVisual />
+
     <ul id="SearchTools_index">
       <li class="current_index">キーワードから検索</li>
       <li class="another_index">
