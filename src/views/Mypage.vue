@@ -4,7 +4,7 @@
 
     <div class="me">
       <div class="info">
-        <div v-if="edit">
+        <div v-if="edit" class="name">
           <tr>
             <th>名前：</th>
           </tr>
@@ -21,13 +21,10 @@
           </div>
         </div>
 
-        <div v-if="edit">
-          <tr>
-            <th>お住まいの地域：</th>
-          </tr>
-          <tr>
-            <td><input type="text" v-model="area" /></td>
-          </tr>
+        <div v-if="edit" class="area">
+          <h3>お住まいの地域：</h3>
+
+          <input type="text" v-model="area" />
         </div>
 
         <div v-else>
@@ -39,15 +36,10 @@
           </div>
         </div>
 
-        <div v-if="edit">
-          <tr>
-            <th>志望業種：</th>
-          </tr>
-          <tr>
-            <td>
-              <input type="text" v-model="gyousyu" />
-            </td>
-          </tr>
+        <div v-if="edit" class="industry">
+          <h3>志望業種：</h3>
+
+          <input type="text" v-model="gyousyu" />
         </div>
 
         <div v-else>
@@ -59,15 +51,10 @@
           </div>
         </div>
 
-        <div v-if="edit">
-          <tr>
-            <th>志望職種：</th>
-          </tr>
-          <tr>
-            <td>
-              <input type="text" v-model="syokusyu" />
-            </td>
-          </tr>
+        <div v-if="edit" class="occupation">
+          <h3>志望職種：</h3>
+
+          <input type="text" v-model="syokusyu" />
         </div>
 
         <div v-else>
@@ -86,12 +73,20 @@
       </div>
     </div>
 
-    <div v-if="edit">
-      <button @click="discard">編集をやめる</button>
-      <button @click="pro">変更する</button>
+    <div class="edit">
+      <div v-if="edit" class="ed">
+        <div class="stop">
+          <button @click="discard">編集をやめる</button>
+        </div>
+        <div class="do">
+          <button @click="pro">変更する</button>
+        </div>
+      </div>
+      <button v-else @click="hennsyuu">編集</button>
+      <div class="change">
+        <router-link to="/edit">メールアドレスとパスワードを変更</router-link>
+      </div>
     </div>
-    <button v-else @click="hennsyuu">編集</button>
-    <router-link to="/edit">メールアドレスとパスワードを変更</router-link>
   </div>
 </template>
 
@@ -188,6 +183,57 @@
   font-size: 1.3rem;
   border-radius: 20rem / 4rem;
   border: 1px solid #59aff1;
+}
+.favcom a:hover {
+  background-color: #59aff1;
+  color: white;
+  box-shadow: 0px 0px 30px white inset;
+  border: white;
+  transition: 0.5s;
+}
+
+.ed {
+  display: flex;
+  flex-direction: row;
+}
+
+.edit button {
+  margin: 0.5rem;
+  height: 3rem;
+  width: 10rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  border: none;
+  border-right: 1px solid #59aff1;
+  background-color: white;
+}
+.edit button:hover {
+  background: linear-gradient(to left, #59aff1, white);
+}
+.change {
+  margin: 0.5rem;
+  height: 4rem;
+  width: 23rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  border-bottom: 1px solid #59aff1;
+  border-top: 1px solid #59aff1;
+}
+.edit a {
+  text-decoration: none;
+  width: 23rem;
+  height: 2rem;
+  margin: 1rem 0rem;
+  border-radius: 20rem / 4rem;
+}
+.edit a:hover {
+  background: linear-gradient(to right, white, #59aff1, white);
 }
 </style>
 
